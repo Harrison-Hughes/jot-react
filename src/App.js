@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './styles.css';
 import API from "./adapters/API";
-import AuthenticatedApp from './auth-app/authenticated-app';
-import UnauthenticatedApp from './unauth-app/unauthenticated-app';
 import { Switch, Route, Redirect } from 'react-router-dom'
+
+import AuthenticatedApp from './auth-app/authenticated-app';
+import SignUpForm from './unauth-app/unauth-forms/SignUpForm';
+import SignInForm from './unauth-app/unauth-forms/SignInForm';
 
 
 const App = () => {
@@ -22,17 +24,29 @@ const App = () => {
 
   return (
     <Switch>
-      <Route exact path="/" render={() => (<Redirect to="/WelcomeBack"/>)}/>
-      {!!user 
-      ? <AuthenticatedApp 
-          user={user} 
-          logOut={() => logOut()} 
-        /> 
-      : <UnauthenticatedApp 
-          signIn={user => setUser(user)}
-        />}
+
+      <Route exact path="/WelcomeToJot">
+        {!user ? <SignUpForm signIn={user => setUser(user)} /> : <Redirect to="/Homescreen" />}
+      </Route>
+      <Route exact path="/WelcomeBack">
+        {!user ? <SignInForm signIn={user => setUser(user)} /> : <Redirect to="/Homescreen" />}
+      </Route>
+      <Route exact path="/Homescreen">
+            {user ? <AuthenticatedApp user={user} logOut={() => logOut()} /> : <Redirect to="/WelcomeToJot" />}
+      </Route>
     </Switch>
     )
 }
 
 export default App
+
+
+{/* <Route exact path="/" render={() => (<Redirect to="/WelcomeBack"/>)}/> */}
+{/* {!!user 
+? <AuthenticatedApp 
+    user={user} 
+    logOut={() => logOut()} 
+  /> 
+: <UnauthenticatedApp 
+    signIn={user => setUser(user)}
+  />} */}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import API from "../../adapters/API";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 
 const SignUpForm = props => {
@@ -11,8 +11,10 @@ const SignUpForm = props => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    API.signin({ email, password })
+    let password_confirmation = passwordConfirmation;
+    API.signup({ email, password , password_confirmation})
       .then(user => props.signIn(user))
+      .then(<Redirect to="/Homescreen" />)
   };
     
   return(

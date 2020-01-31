@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import API from "../../adapters/API";
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 const SignInForm = props => {
   const [email, setEmail] = useState("");
@@ -10,6 +10,7 @@ const SignInForm = props => {
     event.preventDefault();
     API.signin({ email, password })
       .then(user => props.signIn(user))
+      .then(<Redirect to="/Homescreen" />)
   };
     
   return(
