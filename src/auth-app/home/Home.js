@@ -4,7 +4,6 @@ import HomeBody from './HomeBody';
 
 const Home = props => {
 
-  console.log(props)
   return(
     <div className="home">
       <HomeHeader logOut={() => props.logOut()} user={props.user} />

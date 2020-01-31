@@ -46,14 +46,13 @@ const newProject = (name, description, open) =>
   fetch(`${API_ROOT}/newProject`, {
     method: "POST",
     headers: HEADERS_AUTH,
-    body: {"project": { 
+    body: JSON.stringify({"project": { 
       "name": name,
       "description": description,
       "open": open
-  }}
+  }})
   })
   .then(jsonify)
-  .then(handleUserResponse);
 
 const myProjects = () => 
   fetch(`${API_ROOT}/myProjects`, {
@@ -61,7 +60,6 @@ const myProjects = () =>
     headers: HEADERS_AUTH
   })
   .then(jsonify)
-  .then(handleUserResponse);
 
   export default {
     signin,
@@ -69,6 +67,6 @@ const myProjects = () =>
     validate,
     newProject,
     myProjects,
-    hasToken: () => !!localStorage.token,
+    hasToken: !!localStorage.token,
     clearToken: () => localStorage.removeItem("token")
   };
