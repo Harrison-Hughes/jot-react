@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './styles.css';
+import API from "./adapters/API";
+import AuthenticatedApp from './auth-app/authenticated-app';
+import UnauthenticatedApp from './unauth-app/unauthenticated-app';
+import { Switch, Route, Redirect } from 'react-router-dom'
 
-function App() {
+
+const App = () => {
+  const [user, setUser] = useState(null);
+
+  const logOut = () => {
+    setUser(null);
+    API.clearToken();
+  };
+
+  useEffect(() => {
+    if (API.hasToken()) {
+      API.validate()
+        .then(setUser)
+    }}, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <Switch>
+      <Route exact path="/" render={() => (<Redirect to="/WelcomeBack"/>)}/>
+      {!!user 
+      ? <AuthenticatedApp 
+          user={user} 
+          logOut={() => logOut()} 
+        /> 
+      : <UnauthenticatedApp 
+          signIn={user => setUser(user)}
+        />}
+    </Switch>
+    )
 }
 
-export default App;
+export default App
