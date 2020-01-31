@@ -66,6 +66,19 @@ const getProject = projectCode =>
     headers: HEADERS_AUTH
   }).then(jsonify);
 
+const newPad = (name, description, projectId) =>
+  fetch(`${API_ROOT}/newPad`, {
+    method: "POST",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      pad: {
+        name: name,
+        description: description,
+        project_id: projectId
+      }
+    })
+  });
+
 export default {
   signin,
   signup,
@@ -73,6 +86,7 @@ export default {
   newProject,
   myProjects,
   getProject,
+  newPad,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };
