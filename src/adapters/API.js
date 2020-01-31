@@ -1,4 +1,4 @@
-import {API_ROOT, HEADERS, HEADERS_AUTH} from '../constants/index'
+import { API_ROOT, HEADERS, HEADERS_AUTH } from "../constants/index";
 
 const jsonify = resp => {
   if (resp.ok) {
@@ -21,9 +21,8 @@ const signin = user =>
     headers: HEADERS,
     body: JSON.stringify({ user })
   })
-  .then(jsonify)
-  .then(handleUserResponse);
-
+    .then(jsonify)
+    .then(handleUserResponse);
 
 const signup = user =>
   fetch(`${API_ROOT}/signup`, {
@@ -31,42 +30,49 @@ const signup = user =>
     headers: HEADERS,
     body: JSON.stringify({ user })
   })
-  .then(jsonify)
-  .then(handleUserResponse);
+    .then(jsonify)
+    .then(handleUserResponse);
 
 const validate = () =>
   fetch(`${API_ROOT}/validate`, {
     method: "GET",
     headers: HEADERS_AUTH
   })
-  .then(jsonify)
-  .then(handleUserResponse);
+    .then(jsonify)
+    .then(handleUserResponse);
 
-const newProject = (name, description, open) => 
+const newProject = (name, description, open) =>
   fetch(`${API_ROOT}/newProject`, {
     method: "POST",
     headers: HEADERS_AUTH,
-    body: JSON.stringify({"project": { 
-      "name": name,
-      "description": description,
-      "open": open
-  }})
-  })
-  .then(jsonify)
+    body: JSON.stringify({
+      project: {
+        name: name,
+        description: description,
+        open: open
+      }
+    })
+  }).then(jsonify);
 
-const myProjects = () => 
+const myProjects = () =>
   fetch(`${API_ROOT}/myProjects`, {
     method: "GET",
     headers: HEADERS_AUTH
-  })
-  .then(jsonify)
+  }).then(jsonify);
 
-  export default {
-    signin,
-    signup,
-    validate,
-    newProject,
-    myProjects,
-    hasToken: !!localStorage.token,
-    clearToken: () => localStorage.removeItem("token")
-  };
+const getProject = projectCode =>
+  fetch(`${API_ROOT}/projects/${projectCode}`, {
+    method: "GET",
+    headers: HEADERS_AUTH
+  }).then(jsonify);
+
+export default {
+  signin,
+  signup,
+  validate,
+  newProject,
+  myProjects,
+  getProject,
+  hasToken: !!localStorage.token,
+  clearToken: () => localStorage.removeItem("token")
+};

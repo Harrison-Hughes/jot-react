@@ -11,14 +11,19 @@ const Project = ({ match }) => {
 
   useEffect(() => {
     setProjectCode(params.projectCode);
+    fetchProject();
   }, []);
 
-  const fetchProject = () => {};
+  const fetchProject = () => {
+    if (API.hasToken) {
+      API.getProject(params.projectCode).then(setProject);
+    }
+  };
 
   return (
     <div className="project">
-      <ProjectHeader projectCode={projectCode} />
-      <ProjectBody />
+      <ProjectHeader projectCode={projectCode} project={project} />
+      <ProjectBody project={project} />
     </div>
   );
 };
