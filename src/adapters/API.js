@@ -86,7 +86,7 @@ const newPad = (name, description, projectId) =>
   });
 
 const getCollaborators = projectCode =>
-  fetch(`${showCollaborators}/newPad/${projectCode}`, {
+  fetch(`${API_ROOT}/showCollaborators/${projectCode}`, {
     method: "GET",
     headers: HEADERS_AUTH
   }).then(jsonify);

@@ -3,6 +3,7 @@ import UpdateLog from "./project body/UpdateLog";
 import DocumentContainer from "./project body/DocumentContainer";
 import NewDocumentForm from "./project body/NewDocumentForm";
 import API from "../../../adapters/API";
+import CollaboratorList from "./project body/CollaboratorList";
 
 const ProjectBody = props => {
   const [newDocumentForm, setNewDocumentForm] = useState(false);
@@ -21,6 +22,7 @@ const ProjectBody = props => {
   return (
     <div className="project-body">
       <UpdateLog />
+      <CollaboratorList projectCode={props.projectCode} />
       <DocumentContainer
         newDocumentForm={newDocumentForm}
         toggleNewDoc={() => setNewDocumentForm(!newDocumentForm)}

@@ -11,4 +11,5 @@
 .button:hover {
   color: white;
   background: orange;
+  cursor: pointer;
 }

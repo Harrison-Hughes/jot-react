@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Home from "./home/Home";
 import { Switch, Route } from "react-router-dom";
 import Project from "./project/Project";
 
 const AuthenticatedApp = props => {
   return (
-    <div className="authenticated app">
+    <div className="authenticated-app">
       <Switch>
         <Route exact path="/homescreen">
           <Home logOut={() => props.logOut()} user={props.user} />
