@@ -55,7 +55,11 @@ const NewDocumentForm = props => {
           value={formData.description}
         />
         <br />
-        <input type="submit" value="Create document" />
+        <input
+          disabled={formData.name === "" || formData.description === ""}
+          type="submit"
+          value="Create document"
+        />
       </form>
     </FadeInDiv>
   );

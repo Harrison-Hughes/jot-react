@@ -52,7 +52,11 @@ const newProject = (name, description, open) =>
         open: open
       }
     })
-  }).then(jsonify);
+  })
+    .then(jsonify)
+    .catch(error => {
+      console.error("Error:", error);
+    });
 
 const myProjects = () =>
   fetch(`${API_ROOT}/myProjects`, {
@@ -77,6 +81,8 @@ const newPad = (name, description, projectId) =>
         project_id: projectId
       }
     })
+  }).catch(error => {
+    console.error("Error:", error);
   });
 
 export default {
