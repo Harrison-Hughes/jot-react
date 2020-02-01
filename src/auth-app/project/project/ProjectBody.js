@@ -4,6 +4,7 @@ import DocumentContainer from "./project body/DocumentContainer";
 import NewDocumentForm from "./project body/NewDocumentForm";
 import API from "../../../adapters/API";
 import CollaboratorList from "./project body/CollaboratorList";
+import { ActionCable } from "react-actioncable-provider";
 
 const ProjectBody = props => {
   const [newDocumentForm, setNewDocumentForm] = useState(false);
@@ -19,8 +20,21 @@ const ProjectBody = props => {
     }
   };
 
+  const handleReceivedPad = pad => {
+    let projectClone = Object.assign({}, project);
+    let newPads = [...projectClone.pads, pad];
+    projectClone.pads = newPads;
+    setProject(projectClone);
+  };
+
   return (
     <div className="project-body">
+      {project !== [] && (
+        <ActionCable
+          channel={{ channel: "PadsChannel", project: project.id }}
+          onReceived={resp => handleReceivedPad(resp.pad)}
+        />
+      )}
       <UpdateLog />
       <CollaboratorList projectCode={props.projectCode} />
       <DocumentContainer

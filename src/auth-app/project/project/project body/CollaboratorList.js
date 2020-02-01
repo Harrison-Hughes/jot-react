@@ -20,9 +20,7 @@ const CollaboratorList = props => {
 
   const fetchCollaborators = () => {
     if (API.hasToken) {
-      API.getCollaborators(props.projectCode)
-        // .then(console.log);
-        .then(setCollaborators);
+      API.getCollaborators(props.projectCode).then(setCollaborators);
     }
   };
 
