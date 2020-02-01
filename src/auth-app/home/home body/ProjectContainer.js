@@ -12,6 +12,10 @@ const ProjectContainer = props => {
     );
   };
 
+  useEffect(() => {
+    props.refetch();
+  }, []);
+
   return (
     <div className="project-container">
       {renderProjects()}

@@ -3,7 +3,7 @@ import ProjectContainer from "./home body/ProjectContainer";
 import NewProjectForm from "./home body/NewProjectForm";
 import API from "../../adapters/API";
 
-const HomeBody = props => {
+const HomeBody = () => {
   const [newProjectForm, setNewProjectForm] = useState(false);
   const [projects, setProjects] = useState([]);
 
@@ -20,6 +20,7 @@ const HomeBody = props => {
   return (
     <div className="home-body">
       <ProjectContainer
+        refetch={() => fetchProjects()}
         projects={projects}
         newProjectForm={newProjectForm}
         toggleNewProject={() => setNewProjectForm(!newProjectForm)}

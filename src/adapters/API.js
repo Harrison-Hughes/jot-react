@@ -85,6 +85,12 @@ const newPad = (name, description, projectId) =>
     console.error("Error:", error);
   });
 
+const getCollaborators = projectCode =>
+  fetch(`${showCollaborators}/newPad/${projectCode}`, {
+    method: "GET",
+    headers: HEADERS_AUTH
+  }).then(jsonify);
+
 export default {
   signin,
   signup,
@@ -93,6 +99,7 @@ export default {
   myProjects,
   getProject,
   newPad,
+  getCollaborators,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };
