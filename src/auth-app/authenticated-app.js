@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./home/Home";
 import { Switch, Route } from "react-router-dom";
 import Project from "./project/Project";
+import Pad from "./pad/Pad";
 
 const AuthenticatedApp = props => {
   return (
@@ -11,7 +12,10 @@ const AuthenticatedApp = props => {
           <Home logOut={() => props.logOut()} user={props.user} />
         </Route>
         <Route exact path="/project/:projectCode">
-          <Project />
+          <Project user={props.user} />
+        </Route>
+        <Route exact path="/pad/:padCode">
+          <Pad user={props.user} />
         </Route>
       </Switch>
     </div>
