@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Button from "../../../elements/Button";
 
 const NewProjectButton = props => {
   return (
-    <div className="new project">
+    <div className="new-project">
       <Button onClick={() => props.toggleNewProject()}>new project</Button>
     </div>
   );

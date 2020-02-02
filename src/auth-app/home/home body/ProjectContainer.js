@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import ProjectOverview from "./ProjectOverview";
 import NewProjectButton from "./NewProjectButton";
 

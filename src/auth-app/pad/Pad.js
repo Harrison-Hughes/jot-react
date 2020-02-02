@@ -5,16 +5,20 @@ import { ActionCableProvider } from "react-actioncable-provider";
 import PadHeader from "./pad/PadHeader";
 import PadBody from "./pad/PadBody";
 
-const Pad = ({ props, match }) => {
+const Pad = ({ user, location, match }) => {
   const { params } = match;
-  console.log(props.user);
-
   return (
-    <div className="pad">
-      <PadHeader />
-      <ActionCableProvider url={API_WS_ROOT}>
-        <PadBody padId={params.padCode} />
-      </ActionCableProvider>
+    <div>
+      {location.valid ? (
+        <div className="pad">
+          <PadHeader />
+          <ActionCableProvider url={API_WS_ROOT}>
+            <PadBody user={user} padCode={params.padCode} />
+          </ActionCableProvider>
+        </div>
+      ) : (
+        "you do not have access to this document"
+      )}
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Project from "./project/Project";
 import Pad from "./pad/Pad";
 
 const AuthenticatedApp = props => {
+  console.log("unauthapp", props.user);
   return (
     <div className="authenticated-app">
       <Switch>
@@ -12,7 +13,7 @@ const AuthenticatedApp = props => {
           <Home logOut={() => props.logOut()} user={props.user} />
         </Route>
         <Route exact path="/project/:projectCode">
-          <Project user={props.user} />
+          <Project />
         </Route>
         <Route exact path="/pad/:padCode">
           <Pad user={props.user} />

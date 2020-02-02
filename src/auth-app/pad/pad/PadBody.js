@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import API from "../../../adapters/API";
 import { ActionCable } from "react-actioncable-provider";
+import PointContainer from "./pad body/PointContainer";
+import NewPointForm from "./pad body/NewPointForm";
 
 const PadBody = props => {
+  const [newPointForm, setNewPointForm] = useState(false);
   const [pad, setPad] = useState([]);
 
   useEffect(() => {
@@ -10,16 +13,16 @@ const PadBody = props => {
   }, []);
 
   const fetchPad = () => {
-    // if (API.hasToken) {
-    //   API.getProject(props.projectCode).then(setProject);
-    // }
+    if (API.hasToken) {
+      API.getPad(props.padCode).then(setPad);
+    }
   };
 
-  const handleReceivedPad = point => {
-    // let projectClone = Object.assign({}, project);
-    // let newPads = [...projectClone.pads, pad];
-    // projectClone.pads = newPads;
-    // setProject(projectClone);
+  const handleReceivedPoint = point => {
+    let padClone = Object.assign({}, pad);
+    let newPoints = [...padClone.points, point];
+    padClone.points = newPoints;
+    setPad(padClone);
   };
 
   return (
@@ -27,19 +30,20 @@ const PadBody = props => {
       {pad !== [] && (
         <ActionCable
           channel={{ channel: "PointsChannel", pad: pad.id }}
-          onReceived={resp => handleReceivedPad(resp.point)}
+          onReceived={resp => handleReceivedPoint(resp.point)}
         />
       )}
       pad body
-      {/* <DocumentContainer
-        newDocumentForm={newDocumentForm}
-        toggleNewDoc={() => setNewDocumentForm(!newDocumentForm)}
-        pads={project.pads}
+      <PointContainer
+        newPointForm={newPointForm}
+        toggleNewPoint={() => setNewPointForm(!newPointForm)}
+        points={pad.points}
       />
-      <NewDocumentForm
-        projectId={project.id}
-        refetch={() => fetchProject()}
-        newDocumentForm={newDocumentForm} */}
+      <NewPointForm
+        user={props.user}
+        padId={pad.id}
+        refetch={() => fetchPad()}
+        newPointForm={newPointForm}
       />
     </div>
   );

@@ -85,8 +85,30 @@ const newPad = (name, description, projectId) =>
     console.error("Error:", error);
   });
 
+const newPoint = (text, location, author_code, padId) =>
+  fetch(`${API_ROOT}/newPoint`, {
+    method: "POST",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      point: {
+        text: text,
+        location: location,
+        author: author_code,
+        pad_id: padId
+      }
+    })
+  }).catch(error => {
+    console.error("Error:", error);
+  });
+
 const getCollaborators = projectCode =>
   fetch(`${API_ROOT}/showCollaborators/${projectCode}`, {
+    method: "GET",
+    headers: HEADERS_AUTH
+  }).then(jsonify);
+
+const getPad = padCode =>
+  fetch(`${API_ROOT}/pads/${padCode}`, {
     method: "GET",
     headers: HEADERS_AUTH
   }).then(jsonify);
@@ -100,6 +122,8 @@ export default {
   getProject,
   newPad,
   getCollaborators,
+  newPoint,
+  getPad,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };
