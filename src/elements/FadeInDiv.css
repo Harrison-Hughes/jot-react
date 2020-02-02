@@ -1,0 +1,21 @@
+.fade-in-div.off {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 300ms, opacity 300ms linear;
+}
+
+.fade-in-div.on {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 5px;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 300ms linear;
+}
+
+/* <FadeInDiv className={show ? 'fade-in-div on' : 'fade-in-div off'}> */
