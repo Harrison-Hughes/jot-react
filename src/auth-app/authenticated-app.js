@@ -5,7 +5,6 @@ import Project from "./project/Project";
 import Pad from "./pad/Pad";
 
 const AuthenticatedApp = props => {
-  console.log("unauthapp", props.user);
   return (
     <div className="authenticated-app">
       <Switch>
