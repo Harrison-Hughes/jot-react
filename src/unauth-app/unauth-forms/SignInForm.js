@@ -17,7 +17,7 @@ const SignInForm = props => {
   return (
     <div className="main">
       <h1 className="head">log in form</h1>
-      <div className="body form-style-5">
+      <div className="unauth-body form-style-5">
         <form onSubmit={handleSubmit}>
           <div className="form-field">
             <label htmlFor="email">email: </label>

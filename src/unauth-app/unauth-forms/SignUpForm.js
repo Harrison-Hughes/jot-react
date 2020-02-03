@@ -18,8 +18,8 @@ const SignUpForm = props => {
   return (
     <div className="main">
       <h1 className="head">sign up form</h1>
-      <div className="body form-style-5">
-        <form className="body" onSubmit={handleSubmit}>
+      <div className="unauth-body form-style-5">
+        <form className="form-body" onSubmit={handleSubmit}>
           <div className="form-field">
             <label htmlFor="email">email: </label>
             <input

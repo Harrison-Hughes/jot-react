@@ -18,7 +18,7 @@
   grid-area: 2 / 2 / 3 / 3;
 }
 
-.body {
+.unauth-body {
   place-self: center;
   grid-area: 3 / 2 / 4 / 3;
 }
@@ -45,4 +45,8 @@
 
 .form-field {
   margin: 10px;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import API from "../../../adapters/API";
 import FadeInDiv from "../../../elements/FadeInDiv";
+import "./NewProjectForm.css";
 
 const NewProjectForm = props => {
   const [formData, setFormData] = useState({
@@ -10,17 +11,25 @@ const NewProjectForm = props => {
   });
 
   const handleNameChange = e => {
-    setFormData({
-      ...formData,
-      name: e.target.value
-    });
+    if (formData.name.length <= 15) {
+      setFormData({
+        ...formData,
+        name: e.target.value
+      });
+    }
   };
 
   const handleDescChange = e => {
-    setFormData({
-      ...formData,
-      description: e.target.value
-    });
+    if (
+      formData.description.length <= 80 &&
+      formData.description.split(" ").lastIndexOf.length <= 20 &&
+      e.target.keyCode !== 8
+    ) {
+      setFormData({
+        ...formData,
+        description: e.target.value
+      });
+    }
   };
 
   const handleSubmit = event => {
@@ -31,36 +40,61 @@ const NewProjectForm = props => {
       formData.open
     ).then(() => props.refetch());
     setFormData({ name: "", description: "", open: true });
+    props.toggleNewProject();
   };
 
   return (
     <FadeInDiv
       className={props.newProjectForm ? "fade-in-div on" : "fade-in-div off"}
     >
-      <form onSubmit={handleSubmit}>
-        <input
-          onChange={handleNameChange}
-          type="name"
-          name="name"
-          placeholder="name"
-          value={formData.name}
-        />
-        <br />
-        <textarea
-          onChange={handleDescChange}
-          name="description"
-          placeholder="description"
-          value={formData.description}
-        />
-        <br />
-        <input
-          disabled={formData.name === "" || formData.description === ""}
-          type="submit"
-          value="Create project"
-        />
-      </form>
+      <div className="form-style-5">
+        <form onSubmit={handleSubmit}>
+          <div className="form-field">
+            <label>
+              project name: <br />
+              (max 15 chars.)
+            </label>
+            <input
+              onChange={handleNameChange}
+              type="name"
+              name="name"
+              placeholder="name"
+              value={formData.name}
+            />
+          </div>
+          <div className="form-field">
+            <label>
+              project description: <br />
+              (max 80 chars.)
+            </label>
+            <textarea
+              onChange={handleDescChange}
+              name="description"
+              placeholder="description"
+              value={formData.description}
+            />
+          </div>
+          <input
+            disabled={
+              formData.name === "" ||
+              formData.description === "" ||
+              anyWordsInStringTooLong(formData.description)
+            }
+            type="submit"
+            value="Create project"
+          />
+        </form>
+      </div>
     </FadeInDiv>
   );
+};
+
+const anyWordsInStringTooLong = string => {
+  let arr = string.split(" ");
+  let longestLength = arr.sort(function(a, b) {
+    return b.length - a.length;
+  })[0].length;
+  return longestLength >= 15 ? true : false;
 };
 
 export default NewProjectForm;

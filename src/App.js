@@ -40,7 +40,7 @@ const App = () => {
       {user ? (
         <AuthenticatedApp user={user} logOut={() => logOut()} />
       ) : (
-        <Redirect to="/WelcomeToJot" />
+        <Redirect to="/WelcomeBack" />
       )}
     </Switch>
   );
