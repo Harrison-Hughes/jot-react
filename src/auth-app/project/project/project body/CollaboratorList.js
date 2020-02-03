@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import API from "../../../../adapters/API";
+import FadeInDiv from "../../../../elements/FadeInDiv";
 
 const CollaboratorList = props => {
   const [collaborators, setCollaborators] = useState([]);
@@ -25,10 +26,14 @@ const CollaboratorList = props => {
   };
 
   return (
-    <div className="collaborator-list">
-      <h3>Collaborators:</h3>
-      <ul>{renderCollaborators()}</ul>
-    </div>
+    <FadeInDiv
+      className={props.CollaboratorList ? "fade-in-div on" : "fade-in-div off"}
+    >
+      <div className="collaborator-list">
+        <h3>Collaborators:</h3>
+        <ul>{renderCollaborators()}</ul>
+      </div>
+    </FadeInDiv>
   );
 };
 

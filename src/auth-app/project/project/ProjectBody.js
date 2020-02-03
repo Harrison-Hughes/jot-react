@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import UpdateLog from "./project body/UpdateLog";
 import DocumentContainer from "./project body/DocumentContainer";
 import NewDocumentForm from "./project body/NewDocumentForm";
 import API from "../../../adapters/API";
-import CollaboratorList from "./project body/CollaboratorList";
 import { ActionCable } from "react-actioncable-provider";
 
 const ProjectBody = props => {
@@ -16,7 +14,10 @@ const ProjectBody = props => {
 
   const fetchProject = () => {
     if (API.hasToken) {
-      API.getProject(props.projectCode).then(setProject);
+      API.getProject(props.projectCode).then(proj => {
+        setProject(proj);
+        props.passProjectUp(proj);
+      });
     }
   };
 
@@ -35,8 +36,6 @@ const ProjectBody = props => {
           onReceived={resp => handleReceivedPad(resp.pad)}
         />
       )}
-      <UpdateLog />
-      <CollaboratorList projectCode={props.projectCode} />
       <DocumentContainer
         newDocumentForm={newDocumentForm}
         toggleNewDoc={() => setNewDocumentForm(!newDocumentForm)}
@@ -46,6 +45,7 @@ const ProjectBody = props => {
         projectId={project.id}
         refetch={() => fetchProject()}
         newDocumentForm={newDocumentForm}
+        toggleNewDoc={() => setNewDocumentForm(!newDocumentForm)}
       />
     </div>
   );

@@ -1,0 +1,65 @@
+.project-page {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+    -45deg,
+    rgb(124, 250, 112),
+    rgb(247, 250, 82)
+  );
+  display: grid;
+  grid-template-columns: 5% auto 5%;
+  grid-template-rows: 1% 15% 10% auto 10% 1%;
+}
+
+.project-body {
+  height: 100%;
+  width: 100%;
+  background-image: linear-gradient(
+    -45deg,
+    rgb(250, 191, 82),
+    rgb(250, 112, 112)
+  );
+  border-radius: 10px;
+  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  place-self: center;
+  grid-area: 4 / 2 / 5 / 3;
+
+  display: grid;
+  grid-template-columns: 5% 1fr 1fr 1fr 5%;
+  grid-template-rows: 1% 10% auto 10% 1%;
+}
+
+.project-header {
+  color: white;
+  background-image: linear-gradient(
+    -45deg,
+    rgb(250, 191, 82),
+    rgb(250, 112, 112)
+  );
+  border-radius: 10px;
+  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  place-self: center;
+  grid-area: 2 / 2 / 3 / 3;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.project-sub-header {
+  color: white;
+  background-image: linear-gradient(
+    -45deg,
+    rgb(250, 191, 82),
+    rgb(250, 112, 112)
+  );
+  border-radius: 10px;
+  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  place-self: center;
+  grid-area: 3 / 2 / 4 / 3;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+.collaborator-list {
+}

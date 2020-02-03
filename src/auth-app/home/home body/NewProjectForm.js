@@ -50,27 +50,21 @@ const NewProjectForm = props => {
       <div className="form-style-5">
         <form onSubmit={handleSubmit}>
           <div className="form-field">
-            <label>
-              project name: <br />
-              (max 15 chars.)
-            </label>
+            <label>project name:</label>
             <input
               onChange={handleNameChange}
               type="name"
               name="name"
-              placeholder="name"
+              placeholder="name (max 15 chars.)"
               value={formData.name}
             />
           </div>
           <div className="form-field">
-            <label>
-              project description: <br />
-              (max 80 chars.)
-            </label>
+            <label>project description:</label>
             <textarea
               onChange={handleDescChange}
               name="description"
-              placeholder="description"
+              placeholder="description (max 80 chars.)"
               value={formData.description}
             />
           </div>
