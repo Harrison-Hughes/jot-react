@@ -18,7 +18,7 @@ const HomeBody = () => {
   };
 
   return (
-    <div className="home-body">
+    <div className="home-body body">
       <ProjectContainer
         refetch={() => fetchProjects()}
         projects={projects}

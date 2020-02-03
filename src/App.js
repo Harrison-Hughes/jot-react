@@ -47,17 +47,3 @@ const App = () => {
 };
 
 export default App;
-
-{
-  /* <Route exact path="/" render={() => (<Redirect to="/WelcomeBack"/>)}/> */
-}
-{
-  /* {!!user 
-? <AuthenticatedApp 
-    user={user} 
-    logOut={() => logOut()} 
-  /> 
-: <UnauthenticatedApp 
-    signIn={user => setUser(user)}
-  />} */
-}

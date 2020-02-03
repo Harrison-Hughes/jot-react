@@ -3,9 +3,9 @@ import Button from "../../elements/Button";
 
 const HomeHeader = props => {
   return (
-    <div className="home-header">
-      <h1>HOMESCREEN</h1>
+    <div className="home-header header">
       <h4>Your code: {props.user.user_code}</h4>
+      <h1>HOMESCREEN</h1>
       <Button onClick={() => props.logOut()}>log out</Button>
     </div>
   );
