@@ -40,24 +40,10 @@ const App = () => {
       {user ? (
         <AuthenticatedApp user={user} logOut={() => logOut()} />
       ) : (
-        <Redirect to="/WelcomeToJot" />
+        <Redirect to="/WelcomeBack" />
       )}
     </Switch>
   );
 };
 
 export default App;
-
-{
-  /* <Route exact path="/" render={() => (<Redirect to="/WelcomeBack"/>)}/> */
-}
-{
-  /* {!!user 
-? <AuthenticatedApp 
-    user={user} 
-    logOut={() => logOut()} 
-  /> 
-: <UnauthenticatedApp 
-    signIn={user => setUser(user)}
-  />} */
-}

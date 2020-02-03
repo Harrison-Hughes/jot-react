@@ -3,13 +3,16 @@
   font-size: 1rem;
   border-radius: 5px;
   border: solid 1px orange;
-  color: orange;
+  color: white;
+  background: transparent;
+
   margin: 5px;
   transition: 300ms;
+  place-self: center;
 }
 
 .button:hover {
-  color: white;
-  background: orange;
+  color: orange;
+  background: white;
   cursor: pointer;
 }

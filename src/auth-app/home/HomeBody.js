@@ -18,18 +18,23 @@ const HomeBody = () => {
   };
 
   return (
-    <div className="home-body">
-      <ProjectContainer
-        refetch={() => fetchProjects()}
-        projects={projects}
-        newProjectForm={newProjectForm}
-        toggleNewProject={() => setNewProjectForm(!newProjectForm)}
-      />
-      <NewProjectForm
-        refetch={() => fetchProjects()}
-        newProjectForm={newProjectForm}
-      />
-    </div>
+    <>
+      <div className="home-body">
+        <ProjectContainer
+          refetch={() => fetchProjects()}
+          projects={projects}
+          newProjectForm={newProjectForm}
+          toggleNewProject={() => setNewProjectForm(!newProjectForm)}
+        />
+      </div>
+      <div className="home-body-form">
+        <NewProjectForm
+          toggleNewProject={() => setNewProjectForm(!newProjectForm)}
+          refetch={() => fetchProjects()}
+          newProjectForm={newProjectForm}
+        />
+      </div>
+    </>
   );
 };
 

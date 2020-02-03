@@ -16,8 +16,6 @@ const NewPointForm = props => {
     });
   };
 
-  console.log(`${props.user.user_code}`);
-
   const handleSubmit = event => {
     event.preventDefault();
     API.newPoint(

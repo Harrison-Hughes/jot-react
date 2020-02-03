@@ -1,0 +1,60 @@
+.project-container {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 3% 1fr 3%;
+  grid-template-rows: 1% 10% auto 10% 1%;
+}
+
+.project-container-header {
+  box-sizing: border-box;
+  color: white;
+  height: 100%;
+  width: 100%;
+  border-radius: 10px;
+  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  place-self: center;
+  grid-area: 2 / 2 / 3 / 3;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.project-container-project-card {
+  place-self: center;
+}
+
+.project-container-header-left {
+  place-self: center;
+}
+
+.project-container-header-middle {
+  place-self: center;
+}
+
+.project-container-header-right {
+  place-self: center;
+}
+
+.project-container-body {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+
+  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  place-self: center;
+  grid-area: 3 / 2 / 4 / 3;
+
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: 3fr 3fr 2fr;
+}
+
+.project-container-body.blur {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(5px);
+}

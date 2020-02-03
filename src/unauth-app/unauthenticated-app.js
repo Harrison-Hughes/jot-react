@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom'
+import React, { useState, useEffect } from "react";
+import { Switch, Route } from "react-router-dom";
 
-import SignInForm from './unauth-forms/SignInForm';
-import SignUpForm from './unauth-forms/SignUpForm';
+import "./UnauthApp.css";
+import SignInForm from "./unauth-forms/SignInForm";
+import SignUpForm from "./unauth-forms/SignUpForm";
 
 const UnauthenticatedApp = props => {
-  
-  return(
-    <div className="UnauthenticatedApp">
+  return (
+    <div className="unauthenticated-app">
       <Switch>
         <Route exact path="/WelcomeToJot">
           <SignUpForm signIn={user => props.signIn(user)} />
@@ -17,7 +17,7 @@ const UnauthenticatedApp = props => {
         </Route>
       </Switch>
     </div>
-  )
-}
+  );
+};
 
-export default UnauthenticatedApp
+export default UnauthenticatedApp;

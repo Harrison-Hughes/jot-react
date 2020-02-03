@@ -4,7 +4,9 @@ import Button from "../../../elements/Button";
 const NewProjectButton = props => {
   return (
     <div className="new-project">
-      <Button onClick={() => props.toggleNewProject()}>new project</Button>
+      <Button onClick={() => props.toggleNewProject()}>
+        {props.active ? "cancel new project" : "new project"}
+      </Button>
     </div>
   );
 };

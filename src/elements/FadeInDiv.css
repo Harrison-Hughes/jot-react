@@ -1,5 +1,6 @@
-.fade-in-div.off {
-  padding: 10px 20px;
+/* .fade-in-div.off {
+  height: 0px;
+  width: 0px;
   font-size: 1rem;
   border-radius: 5px;
   margin: 5px;
@@ -15,7 +16,29 @@
   margin: 5px;
   visibility: visible;
   opacity: 1;
-  transition: opacity 300ms linear;
-}
+  transition-delay: 0.5s;
+  transition: opacity 300ms linear, width 0s linear 0.31s;
+} */
 
 /* <FadeInDiv className={show ? 'fade-in-div on' : 'fade-in-div off'}> */
+
+.fade-in-div.off {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 5px;
+  display: none;
+  opacity: 0;
+  transition: display 0s 300ms, opacity 300ms linear;
+}
+
+.fade-in-div.on {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 5px;
+  margin: 5px;
+  display: block;
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 300ms linear;
+}

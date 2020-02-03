@@ -1,0 +1,52 @@
+.main {
+  height: 100vh;
+  width: 100%;
+  background-image: linear-gradient(
+    -45deg,
+    rgb(124, 250, 112),
+    rgb(247, 250, 82)
+  );
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 10% 10% 30% 10% auto;
+}
+
+.head {
+  color: black;
+  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  place-self: center;
+  grid-area: 2 / 2 / 3 / 3;
+}
+
+.unauth-body {
+  place-self: center;
+  grid-area: 3 / 2 / 4 / 3;
+}
+
+.foot {
+  place-self: center;
+  grid-area: 4 / 2 / 5 / 3;
+}
+
+.form-style-5 {
+  max-width: 500px;
+  padding: 10px 20px;
+  background: cornsilk;
+  margin: 10px auto;
+  padding: 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
+
+.form-style-5 label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-field {
+  margin: 10px;
+}
+
+input[type="submit"]:hover {
+  cursor: pointer;
+}

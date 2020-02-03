@@ -3,9 +3,9 @@ import Home from "./home/Home";
 import { Switch, Route } from "react-router-dom";
 import Project from "./project/Project";
 import Pad from "./pad/Pad";
+import "./AuthApp.css";
 
 const AuthenticatedApp = props => {
-  console.log("unauthapp", props.user);
   return (
     <div className="authenticated-app">
       <Switch>
