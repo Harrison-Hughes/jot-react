@@ -7,9 +7,10 @@ import PadBody from "./pad/PadBody";
 
 const Pad = ({ user, location, match }) => {
   const { params } = match;
+  // console.table("inside pad", [user, location, match]);
   return (
     <div>
-      {location.valid ? (
+      {location.state.valid ? (
         <div className="pad">
           <PadHeader />
           <ActionCableProvider url={API_WS_ROOT}>

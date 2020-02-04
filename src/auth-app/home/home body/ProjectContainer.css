@@ -39,7 +39,7 @@
 
 .project-container-body {
   box-sizing: border-box;
-  height: 100%;
+  height: 50vh;
   width: 100%;
 
   font-family: sans, Arial, Helvetica Neue, sans-serif;
@@ -48,7 +48,9 @@
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-template-rows: 3fr 3fr 2fr;
+  grid-template-rows: 1fr;
+
+  overflow: scroll;
 }
 
 .project-container-body.blur {
@@ -57,4 +59,18 @@
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
   filter: blur(5px);
+}
+
+.y-proximity {
+  scroll-snap-type: y proximity;
+}
+
+.wrapper {
+  height: 70%;
+}
+
+.element {
+  scroll-margin: 10px;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
 }

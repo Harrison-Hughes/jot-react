@@ -113,6 +113,12 @@ const getPad = padCode =>
     headers: HEADERS_AUTH
   }).then(jsonify);
 
+const getCollaboration = (projectID, userID) =>
+  fetch(`${API_ROOT}/getCollaboration/${userID}/${projectID}`, {
+    method: "GET",
+    headers: HEADERS_AUTH
+  }).then(jsonify);
+
 export default {
   signin,
   signup,
@@ -124,6 +130,7 @@ export default {
   getCollaborators,
   newPoint,
   getPad,
+  getCollaboration,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };

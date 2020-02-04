@@ -1,11 +1,7 @@
 .main {
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(
-    -45deg,
-    rgb(124, 250, 112),
-    rgb(247, 250, 82)
-  );
+  background-image: linear-gradient(-45deg, rgb(10, 97, 97), rgb(6, 240, 240));
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
   grid-template-rows: 10% 10% 30% 10% auto;

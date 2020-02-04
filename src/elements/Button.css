@@ -2,7 +2,7 @@
   padding: 10px 20px;
   font-size: 1rem;
   border-radius: 5px;
-  border: solid 1px orange;
+  border: solid 1px rgb(10, 97, 97);
   color: white;
   background: transparent;
 
@@ -12,7 +12,7 @@
 }
 
 .button:hover {
-  color: orange;
+  color: rgb(10, 97, 97);
   background: white;
   cursor: pointer;
 }

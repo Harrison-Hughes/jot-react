@@ -12,11 +12,34 @@ const DocumentContainer = props => {
   };
 
   return (
-    <div className="document-container">
-      <h3>Documents:</h3>
-      {renderPads()}
-      <NewDocumentButton toggleNewDoc={props.toggleNewDoc} />
-    </div>
+    <>
+      <div className="document-display-header">
+        <div className="document-display-header-left"></div>
+        <div className="document-display-header-centre">
+          <h3>Documents:</h3>
+        </div>
+        <div className="document-display-header-right">
+          <NewDocumentButton
+            on={props.showNewDocumentForm}
+            toggleNewDoc={() => props.toggleNewDoc()}
+          />
+        </div>
+      </div>
+      <div
+        className={
+          props.someFormPresent
+            ? "document-display-body blur"
+            : "document-display-body"
+        }
+      >
+        <div className="document-display-body-left"></div>
+        <div className="document-display-body-right">
+          <div className="scroll-container y-scroll y-proximity">
+            <div className="wrapper">{renderPads()}</div>
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
 

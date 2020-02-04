@@ -9,7 +9,7 @@ const ProjectContainer = props => {
       props.projects !== [] &&
       props.projects.map((project, i) => {
         return (
-          <div key={i} className="project-container-project-card">
+          <div key={i} className="project-container-project-card element">
             <ProjectCard
               unflippable={props.newProjectForm}
               title={project.name}
@@ -46,8 +46,8 @@ const ProjectContainer = props => {
       <div
         className={
           props.newProjectForm
-            ? "project-container-body blur"
-            : "project-container-body"
+            ? "project-container-body blur y-proximity"
+            : "project-container-body y-proximity"
         }
       >
         {renderProjectCards()}
