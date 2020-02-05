@@ -119,6 +119,26 @@ const getCollaboration = (projectID, userID) =>
     headers: HEADERS_AUTH
   }).then(jsonify);
 
+const deletePad = padID =>
+  fetch(`${API_ROOT}/deletePad/${padID}`, {
+    method: "DELETE",
+    headers: HEADERS_AUTH
+  });
+
+const joinProject = (project_code, user_code, nickname, access) =>
+  fetch(`${API_ROOT}/joinProject`, {
+    method: "POST",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      collaboration: {
+        project_code: project_code,
+        user_code: user_code,
+        nickname: nickname,
+        access: access
+      }
+    })
+  });
+
 export default {
   signin,
   signup,
@@ -131,6 +151,8 @@ export default {
   newPoint,
   getPad,
   getCollaboration,
+  deletePad,
+  joinProject,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };

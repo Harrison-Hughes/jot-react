@@ -5,6 +5,7 @@ import API from "../../adapters/API";
 
 const HomeBody = () => {
   const [newProjectForm, setNewProjectForm] = useState(false);
+  const [joinProjectForm, setJoinProjectForm] = useState(false);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
