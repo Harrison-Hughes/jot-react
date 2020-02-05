@@ -73,6 +73,7 @@ const NewDocumentForm = props => {
                 value={formData.description}
               />
             </div>
+
             <input
               disabled={
                 formData.name === "" ||

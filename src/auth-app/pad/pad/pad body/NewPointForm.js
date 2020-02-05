@@ -28,25 +28,24 @@ const NewPointForm = props => {
   };
 
   return (
-    <FadeInDiv
-      className={props.newPointForm ? "fade-in-div on" : "fade-in-div off"}
-    >
-      <form onSubmit={handleSubmit}>
-        <textarea
+    <div className="new-point-form">
+      {/* <form onSubmit={handleSubmit}> */}
+      <div className="new-point-form-left">
+        <input
           onChange={handleTextChange}
           type="text"
           name="text"
           placeholder="text"
           value={formData.text}
         />
-        <br />
-        <input
-          disabled={formData.text === ""}
-          type="submit"
-          value="Add point"
-        />
-      </form>
-    </FadeInDiv>
+      </div>
+      <div className="new-point-form-right">
+        <button disabled={formData.text === ""} type="submit">
+          Add point
+        </button>
+      </div>
+      {/* </form> */}
+    </div>
   );
 };
 

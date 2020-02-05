@@ -16,7 +16,7 @@ const DocumentContainer = props => {
       <div className="document-display-header">
         <div className="document-display-header-left"></div>
         <div className="document-display-header-centre">
-          <h3>Documents:</h3>
+          <h3 className="sub">documents</h3>
         </div>
         <div className="document-display-header-right">
           <NewDocumentButton
@@ -32,7 +32,9 @@ const DocumentContainer = props => {
             : "document-display-body"
         }
       >
-        <div className="document-display-body-left"></div>
+        <div className="document-display-body-left">
+          selected project details / project log
+        </div>
         <div className="document-display-body-right">
           <div className="scroll-container y-scroll y-proximity">
             <div className="wrapper">{renderPads()}</div>

@@ -103,11 +103,17 @@
   grid-template-columns: 1fr 3fr;
 }
 
+.document-display-body-left {
+  place-self: center;
+}
+
 .document-overview {
   place-self: center;
   padding: 10px 20px;
   background: cornsilk;
   margin: 5px auto;
+  border-radius: 4px;
+
   padding-left: 20px;
   padding-right: 20px;
   transition: color 400ms, background 400ms;
@@ -150,4 +156,8 @@
   scroll-margin: 10px;
   scroll-snap-align: start;
   scroll-snap-stop: normal;
+}
+
+.sub {
+  color: white;
 }
