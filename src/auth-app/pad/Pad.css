@@ -55,6 +55,7 @@
 .new-point-form-container {
   grid-area: 3/1/5/4;
   width: 100%;
+  max-height: 100%;
 
   background-color: rgb(92, 92, 202);
 
@@ -65,6 +66,7 @@
 
 .new-point-form {
   grid-area: 2/2/3/3;
+  max-height: 100%;
 
   display: grid;
   grid-template-columns: 4fr 1fr;
@@ -80,6 +82,26 @@
   grid-area: 1/2/2/3;
 }
 
+.new-point-textarea-input {
+  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  place-self: center;
+  resize: none;
+  place-self: center;
+}
+
+/* .new-point-textarea-input:focus {
+  border: 3px solid #555;
+} */
+
 .bullet-point {
-  background-color: rgb(92, 92, 202);
+  padding: 5px;
+  margin: 3px;
+  border-radius: 3px;
+  background-color: cornsilk;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.bullet-point:hover {
+  cursor: pointer;
 }

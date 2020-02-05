@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import API from "../../../../adapters/API";
-import FadeInDiv from "../../../../elements/FadeInDiv";
+import Button from "../../../../elements/Button";
 
 const NewPointForm = props => {
   const [formData, setFormData] = useState({
@@ -29,22 +29,26 @@ const NewPointForm = props => {
 
   return (
     <div className="new-point-form">
-      {/* <form onSubmit={handleSubmit}> */}
       <div className="new-point-form-left">
-        <input
+        <textarea
+          className="new-point-textarea-input"
           onChange={handleTextChange}
-          type="text"
+          rows="4"
+          cols="50"
           name="text"
-          placeholder="text"
+          placeholder="new point"
           value={formData.text}
         />
       </div>
       <div className="new-point-form-right">
-        <button disabled={formData.text === ""} type="submit">
-          Add point
-        </button>
+        <Button
+          thin
+          disabled={formData.text === ""}
+          onClick={e => handleSubmit(e)}
+        >
+          add point
+        </Button>
       </div>
-      {/* </form> */}
     </div>
   );
 };
