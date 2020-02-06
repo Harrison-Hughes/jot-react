@@ -21,6 +21,7 @@ const HomeBody = ({ user }) => {
     <>
       <div className="home-body">
         <ProjectContainer
+          user={user}
           refetch={() => fetchProjects()}
           projects={projects}
           newProjectForm={newProjectForm}

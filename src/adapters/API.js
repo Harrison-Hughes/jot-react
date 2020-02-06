@@ -41,7 +41,7 @@ const validate = () =>
     .then(jsonify)
     .then(handleUserResponse);
 
-const newProject = (user_code, name, description, open) =>
+const newProject = (user_code, name, description, open, default_access) =>
   fetch(`${API_ROOT}/newProject`, {
     method: "POST",
     headers: HEADERS_AUTH,
@@ -50,7 +50,8 @@ const newProject = (user_code, name, description, open) =>
         user_code: user_code,
         name: name,
         description: description,
-        open: open
+        open: open,
+        default_access: default_access
       }
     })
   })
@@ -126,7 +127,7 @@ const deletePad = padID =>
     headers: HEADERS_AUTH
   });
 
-const joinProjectIfOpen = (project_code, user_code, nickname, access) =>
+const joinProjectIfOpen = (project_code, user_code, nickname) =>
   fetch(`${API_ROOT}/joinProjectIfOpen`, {
     method: "POST",
     headers: HEADERS_AUTH,
@@ -134,11 +135,40 @@ const joinProjectIfOpen = (project_code, user_code, nickname, access) =>
       collaboration: {
         project_code: project_code,
         user_code: user_code,
-        nickname: nickname,
-        access: access
+        nickname: nickname
       }
     })
   });
+
+const sendInvitation = (userCode, projectCode) =>
+  fetch(`${API_ROOT}/sendInvitation`, {
+    method: "POST",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      collaboration: {
+        user_code: userCode,
+        project_code: projectCode
+      }
+    })
+  });
+
+const acceptInvitation = (invitationId, nickname) =>
+  fetch(`${API_ROOT}/acceptInvitation`, {
+    method: "POST",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      collaboration: {
+        invitation_id: invitationId,
+        nickname: nickname
+      }
+    })
+  });
+
+const myInvitations = userCode =>
+  fetch(`${API_ROOT}/myInvitations/${userCode}`, {
+    method: "GET",
+    headers: HEADERS_AUTH
+  }).then(jsonify);
 
 export default {
   signin,
@@ -154,6 +184,9 @@ export default {
   getCollaboration,
   deletePad,
   joinProjectIfOpen,
+  sendInvitation,
+  acceptInvitation,
+  myInvitations,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };

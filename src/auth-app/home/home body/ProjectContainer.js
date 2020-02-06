@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import NewProjectButton from "./NewProjectButton";
 import ProjectCard from "../../../elements/ProjectCard";
 import "./ProjectContainer.css";
@@ -9,15 +9,19 @@ const ProjectContainer = props => {
     return (
       props.projects !== [] &&
       props.projects.map((project, i) => {
+        // let access = userAccess(project.id, props.user.id);
+        // console.log(access);
         return (
           <div key={i} className="project-container-project-card element">
             <ProjectCard
+              projectID={project.id}
+              userID={props.user.id}
               unflippable={props.newProjectForm || props.joinProjectForm}
               title={project.name}
               code={project.project_code}
-              status={project.open ? "open" : "false"}
+              status={project.open ? "open" : "private"}
               desc={project.description}
-              access={"admin"}
+              // access={"admin"}
               lastEdited={project.updated_at}
             />
           </div>
@@ -60,5 +64,15 @@ const ProjectContainer = props => {
     </div>
   );
 };
+
+// const userAccess = (projectID, userID) => {
+//   const [access, setAccess] = useState("")
+
+//   API.getCollaboration(projectID, userID)
+//     // .then(resp => console.log(resp));
+//     .then(resp => setAccess(resp[0].access));
+
+//   return access;
+// };
 
 export default ProjectContainer;

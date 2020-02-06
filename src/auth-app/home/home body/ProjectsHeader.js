@@ -1,12 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from "react";
 
 const ProjectsHeader = props => {
+  return <div className="projects header">My projects:</div>;
+};
 
-  return(
-    <div className="projects header">
-      My projects:
-    </div>
-  )
-}
-
-export default ProjectsHeader
+export default ProjectsHeader;

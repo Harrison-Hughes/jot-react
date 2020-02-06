@@ -11,9 +11,13 @@ const JoinProjectForm = props => {
     setProjectCode(e.target.value);
   };
 
+  const handleNicknameChange = e => {
+    setNickname(e.target.value);
+  };
+
   const handleSubmit = event => {
     event.preventDefault();
-    API.joinProjectIfOpen(projectCode, props.user.user_code, nickname, "admin")
+    API.joinProjectIfOpen(projectCode, props.user.user_code, nickname)
       .then(resp => resp.json())
       .then(resp => {
         if (
@@ -43,8 +47,18 @@ const JoinProjectForm = props => {
               value={projectCode}
             />
           </div>
+          <div className="form-field">
+            <label>nickname:</label>
+            <input
+              onChange={handleNicknameChange}
+              type="name"
+              name="name"
+              placeholder="how you would like to be known"
+              value={nickname}
+            />
+          </div>
           <input
-            disabled={projectCode.length !== 8}
+            disabled={projectCode.length !== 8 || nickname.length === 0}
             type="submit"
             value="join project"
           />
