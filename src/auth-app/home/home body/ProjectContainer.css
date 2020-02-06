@@ -13,7 +13,7 @@
   height: 100%;
   width: 100%;
   border-radius: 10px;
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  font-family: "Roboto", sans-serif;
   place-self: center;
   grid-area: 2 / 2 / 3 / 3;
 
@@ -35,6 +35,8 @@
 
 .project-container-header-right {
   place-self: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .project-container-body {
@@ -42,7 +44,7 @@
   height: 50vh;
   width: 100%;
 
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  font-family: "Roboto", sans-serif;
   place-self: center;
   grid-area: 3 / 2 / 4 / 3;
 
@@ -73,4 +75,12 @@
   scroll-margin: 10px;
   scroll-snap-align: start;
   scroll-snap-stop: normal;
+}
+
+.join-project {
+  place-self: center;
+}
+
+.new-project {
+  place-self: center;
 }

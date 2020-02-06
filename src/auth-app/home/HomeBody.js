@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import ProjectContainer from "./home body/ProjectContainer";
 import NewProjectForm from "./home body/NewProjectForm";
 import API from "../../adapters/API";
+import JoinProjectForm from "./home body/JoinProjectForm";
 
-const HomeBody = () => {
+const HomeBody = ({ user }) => {
   const [newProjectForm, setNewProjectForm] = useState(false);
   const [joinProjectForm, setJoinProjectForm] = useState(false);
   const [projects, setProjects] = useState([]);
@@ -13,9 +14,7 @@ const HomeBody = () => {
   }, []);
 
   const fetchProjects = () => {
-    if (API.hasToken) {
-      API.myProjects().then(setProjects);
-    }
+    API.myProjects(user.user_code).then(setProjects);
   };
 
   return (
@@ -25,14 +24,25 @@ const HomeBody = () => {
           refetch={() => fetchProjects()}
           projects={projects}
           newProjectForm={newProjectForm}
+          joinProjectForm={joinProjectForm}
           toggleNewProject={() => setNewProjectForm(!newProjectForm)}
+          toggleJoinProject={() => setJoinProjectForm(!joinProjectForm)}
         />
       </div>
       <div className="home-body-form">
         <NewProjectForm
+          user={user}
           toggleNewProject={() => setNewProjectForm(!newProjectForm)}
           refetch={() => fetchProjects()}
           newProjectForm={newProjectForm}
+        />
+      </div>
+      <div className="home-body-form">
+        <JoinProjectForm
+          joinProjectForm={joinProjectForm}
+          refetch={() => fetchProjects()}
+          toggleJoinProject={() => setJoinProjectForm(!joinProjectForm)}
+          user={user}
         />
       </div>
     </>

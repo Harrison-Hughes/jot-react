@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import NewProjectButton from "./NewProjectButton";
 import ProjectCard from "../../../elements/ProjectCard";
 import "./ProjectContainer.css";
+import JoinProjectButton from "./JoinProjectButton";
 
 const ProjectContainer = props => {
   const renderProjectCards = () => {
@@ -11,7 +12,7 @@ const ProjectContainer = props => {
         return (
           <div key={i} className="project-container-project-card element">
             <ProjectCard
-              unflippable={props.newProjectForm}
+              unflippable={props.newProjectForm || props.joinProjectForm}
               title={project.name}
               code={project.project_code}
               status={project.open ? "open" : "false"}
@@ -41,11 +42,15 @@ const ProjectContainer = props => {
             active={props.newProjectForm}
             toggleNewProject={props.toggleNewProject}
           />
+          <JoinProjectButton
+            active={props.joinProjectForm}
+            toggleJoinProject={props.toggleJoinProject}
+          />
         </div>
       </div>
       <div
         className={
-          props.newProjectForm
+          props.newProjectForm || props.joinProjectForm
             ? "project-container-body blur y-proximity"
             : "project-container-body y-proximity"
         }

@@ -35,6 +35,7 @@ const NewProjectForm = props => {
   const handleSubmit = event => {
     event.preventDefault();
     API.newProject(
+      props.user.user_code,
       formData.name,
       formData.description,
       formData.open

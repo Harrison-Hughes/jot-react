@@ -41,12 +41,13 @@ const validate = () =>
     .then(jsonify)
     .then(handleUserResponse);
 
-const newProject = (name, description, open) =>
+const newProject = (user_code, name, description, open) =>
   fetch(`${API_ROOT}/newProject`, {
     method: "POST",
     headers: HEADERS_AUTH,
     body: JSON.stringify({
       project: {
+        user_code: user_code,
         name: name,
         description: description,
         open: open
@@ -58,8 +59,8 @@ const newProject = (name, description, open) =>
       console.error("Error:", error);
     });
 
-const myProjects = () =>
-  fetch(`${API_ROOT}/myProjects`, {
+const myProjects = userCode =>
+  fetch(`${API_ROOT}/myProjects/${userCode}`, {
     method: "GET",
     headers: HEADERS_AUTH
   }).then(jsonify);
@@ -125,8 +126,8 @@ const deletePad = padID =>
     headers: HEADERS_AUTH
   });
 
-const joinProject = (project_code, user_code, nickname, access) =>
-  fetch(`${API_ROOT}/joinProject`, {
+const joinProjectIfOpen = (project_code, user_code, nickname, access) =>
+  fetch(`${API_ROOT}/joinProjectIfOpen`, {
     method: "POST",
     headers: HEADERS_AUTH,
     body: JSON.stringify({
@@ -152,7 +153,7 @@ export default {
   getPad,
   getCollaboration,
   deletePad,
-  joinProject,
+  joinProjectIfOpen,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };
