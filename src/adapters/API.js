@@ -152,16 +152,22 @@ const sendInvitation = (userCode, projectCode) =>
     })
   });
 
-const acceptInvitation = (invitationId, nickname) =>
+const acceptInvitation = (invitationID, nickname) =>
   fetch(`${API_ROOT}/acceptInvitation`, {
     method: "POST",
     headers: HEADERS_AUTH,
     body: JSON.stringify({
       collaboration: {
-        invitation_id: invitationId,
+        invitation_id: invitationID,
         nickname: nickname
       }
     })
+  });
+
+const declineInvitation = invitationID =>
+  fetch(`${API_ROOT}/declineInvitation/${invitationID}`, {
+    method: "DELETE",
+    headers: HEADERS_AUTH
   });
 
 const myInvitations = userCode =>
@@ -186,6 +192,7 @@ export default {
   joinProjectIfOpen,
   sendInvitation,
   acceptInvitation,
+  declineInvitation,
   myInvitations,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import NewProjectButton from "./NewProjectButton";
+import NewProjectButton from "./buttons/NewProjectButton";
 import ProjectCard from "../../../elements/ProjectCard";
 import "./ProjectContainer.css";
-import JoinProjectButton from "./JoinProjectButton";
+import JoinProjectButton from "./buttons/JoinProjectButton";
+import ShowInvitationsButton from "./buttons/ShowInvitationsButton";
 
 const ProjectContainer = props => {
   const renderProjectCards = () => {
@@ -37,7 +38,12 @@ const ProjectContainer = props => {
   return (
     <div className="project-container">
       <div className="project-container-header">
-        <div className="project-container-header-left"></div>
+        <div className="project-container-header-left">
+          <ShowInvitationsButton
+            active={props.invitationsList}
+            toggleInvitationsList={props.toggleInvitationsList}
+          />
+        </div>
         <div className="project-container-header-middle">
           <h2>YOUR PROJECTS</h2>
         </div>

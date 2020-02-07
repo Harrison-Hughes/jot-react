@@ -16,3 +16,23 @@
   background: white;
   cursor: pointer;
 }
+
+.negative {
+  border: solid 1px red;
+  color: red;
+}
+
+.negative:hover {
+  color: white;
+  background: red;
+}
+
+.positive {
+  border: solid 1px green;
+  color: green;
+}
+
+.positive:hover {
+  color: white;
+  background: green;
+}
