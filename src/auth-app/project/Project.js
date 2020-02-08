@@ -4,7 +4,7 @@ import ProjectBody from "./project/ProjectBody";
 import { withRouter } from "react-router-dom";
 import { API_WS_ROOT } from "../../constants/index";
 import { ActionCableProvider } from "react-actioncable-provider";
-import CollaboratorList from "./project/CollaboratorList";
+import CollaboratorList from "./project/collaborators/CollaboratorList";
 import UpdateLog from "./project/project body/UpdateLog";
 import API from "../../adapters/API";
 import NewDocumentForm from "./project/NewDocumentForm";
@@ -56,6 +56,10 @@ const Project = ({ match, user }) => {
         setProject(proj);
       });
     }
+  };
+
+  const inviteUser = userCode => {
+    !!project && API.sendInvitation(userCode, project.project_code);
   };
 
   return (

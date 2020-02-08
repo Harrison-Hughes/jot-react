@@ -7,6 +7,9 @@ const HomeHeader = props => {
       <div className="h1">
         <h4>Your code: {props.user.user_code}</h4>
       </div>
+      <div className="h2">
+        <h4>Your nickname: {props.user.default_nickname}</h4>
+      </div>
       <div className="h3">
         <h1>JOT</h1>
       </div>

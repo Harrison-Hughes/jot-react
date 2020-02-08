@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import FadeInDiv from "../../../elements/FadeInDiv";
+import FadeInDiv from "../../../../elements/FadeInDiv";
 
 const CollaboratorList = props => {
   const renderCollaborators = () => {
@@ -21,8 +21,11 @@ const CollaboratorList = props => {
           props.showCollaborators ? "fade-in-div on" : "fade-in-div off"
         }
       >
-        <h3>Collaborators:</h3>
-        <ul>{renderCollaborators()}</ul>
+        <div className="collaborator-background">
+          <h3>Collaborators:</h3>
+          <ul>{renderCollaborators()}</ul>
+          <h3>Invite:</h3>
+        </div>
       </FadeInDiv>
     </div>
   );

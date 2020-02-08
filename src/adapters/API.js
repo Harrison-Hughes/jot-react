@@ -176,6 +176,43 @@ const myInvitations = userCode =>
     headers: HEADERS_AUTH
   }).then(jsonify);
 
+const leaveProject = (userID, projectID) =>
+  fetch(`${API_ROOT}/leaveProject/${userID}/${projectID}`, {
+    method: "DELETE",
+    headers: HEADERS_AUTH
+  });
+
+const deletePoint = pointID =>
+  fetch(`${API_ROOT}/deletePoint/${pointID}`, {
+    method: "DELETE",
+    headers: HEADERS_AUTH
+  });
+
+const updateProject = (name, description, default_access, open) =>
+  fetch(`${API_ROOT}/updateProject`, {
+    method: "PATCH",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      project: {
+        name: name,
+        description: description,
+        default_access: default_access,
+        open: open
+      }
+    })
+  });
+
+const updateDefaultNickname = (userID, nickname) =>
+  fetch(`${API_ROOT}/updateDefaultNickname/${userID}`, {
+    method: "PATCH",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      user: {
+        default_nickname: nickname
+      }
+    })
+  });
+
 export default {
   signin,
   signup,
@@ -194,6 +231,10 @@ export default {
   acceptInvitation,
   declineInvitation,
   myInvitations,
+  leaveProject,
+  deletePoint,
+  updateProject,
+  updateDefaultNickname,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };

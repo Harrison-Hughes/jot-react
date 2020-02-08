@@ -14,7 +14,10 @@
 
   background-color: rgb(0, 139, 139);
   border-radius: 10px;
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
+
   place-self: center;
   grid-area: 3 / 2 / 4 / 3;
 
@@ -28,7 +31,8 @@
   color: white;
   background-color: rgb(0, 139, 139);
   border-radius: 10px;
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
   place-self: center;
   grid-area: 2 / 2 / 3 / 3;
 

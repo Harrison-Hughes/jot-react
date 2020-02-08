@@ -58,7 +58,7 @@ const JoinProjectForm = props => {
             />
           </div>
           <input
-            disabled={projectCode.length !== 8 || nickname.length === 0}
+            disabled={projectCode.length !== 6 || nickname.length === 0}
             type="submit"
             value="join project"
           />

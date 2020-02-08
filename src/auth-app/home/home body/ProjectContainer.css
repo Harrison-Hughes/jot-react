@@ -5,6 +5,8 @@
   display: grid;
   grid-template-columns: 3% 1fr 3%;
   grid-template-rows: 1% 10% auto 10% 1%;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
 }
 
 .project-container-header {
@@ -13,7 +15,8 @@
   height: 100%;
   width: 100%;
   border-radius: 10px;
-  font-family: "Roboto", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
   place-self: center;
   grid-area: 2 / 2 / 3 / 3;
 
