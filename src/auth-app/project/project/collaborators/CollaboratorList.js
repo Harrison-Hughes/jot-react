@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import FadeInDiv from "../../../../elements/FadeInDiv";
+import "./Collaborators.css";
+import CollaboratorComponent from "./CollaboratorComponent";
+import InviteCollaboratorForm from "./InviteCollaboratorForm";
 
 const CollaboratorList = props => {
   const renderCollaborators = () => {
     if (props.collaborators !== []) {
       return props.collaborators.map((c, i) => {
         return (
-          <li key={i}>
-            {c.nickname}, {c.user_code}
-          </li>
+          <div key={i}>
+            <CollaboratorComponent access={props.access} collaborator={c} />
+          </div>
         );
       });
     }
@@ -22,9 +25,19 @@ const CollaboratorList = props => {
         }
       >
         <div className="collaborator-background">
-          <h3>Collaborators:</h3>
-          <ul>{renderCollaborators()}</ul>
-          <h3>Invite:</h3>
+          <div className="collaborators-current">
+            <h3>Collaborators:</h3>
+            <div className="collaborator-container">
+              <CollaboratorComponent keyCard collaborator={null} />
+              {renderCollaborators()}
+            </div>
+          </div>
+          <div className="collaborators-invite">
+            <h3>Invite:</h3>
+            <InviteCollaboratorForm
+              inviteUser={userCode => props.inviteUser(userCode)}
+            />
+          </div>
         </div>
       </FadeInDiv>
     </div>

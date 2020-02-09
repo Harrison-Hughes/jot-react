@@ -26,7 +26,6 @@ const Project = ({ match, user }) => {
     nickname: "",
     access: ""
   });
-  // const [userCode, setUserCode] = useState(`000000`);
 
   useEffect(() => fetchCollaborators(), []);
   useEffect(() => fetchProject(), []);
@@ -59,6 +58,7 @@ const Project = ({ match, user }) => {
   };
 
   const inviteUser = userCode => {
+    console.log(userCode, project.project_code);
     !!project && API.sendInvitation(userCode, project.project_code);
   };
 
@@ -111,6 +111,7 @@ const Project = ({ match, user }) => {
         showCollaborators={showCollaborators}
         toggleShowCollaborators={() => setShowCollaborators(!showCollaborators)}
         projectCode={params.projectCode}
+        inviteUser={userCode => inviteUser(userCode)}
       />
       <EditProjectForm showEditForm={showEditProject} />
       <UpdateLog />

@@ -145,7 +145,7 @@ const sendInvitation = (userCode, projectCode) =>
     method: "POST",
     headers: HEADERS_AUTH,
     body: JSON.stringify({
-      collaboration: {
+      invitation: {
         user_code: userCode,
         project_code: projectCode
       }

@@ -4,7 +4,6 @@ import { ActionCable } from "react-actioncable-provider";
 
 const ProjectBody = props => {
   const [project, setProject] = useState(props.project);
-  const [selectedDoc, setSelectedDoc] = useState(null);
 
   useEffect(() => setProject(props.project), [props]);
 

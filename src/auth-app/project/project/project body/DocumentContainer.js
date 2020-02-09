@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import DocumentOverview from "./document container/DocumentOverview";
 import NewDocumentButton from "./document container/NewDocumentButton";
+import SelectedDocumentPanel from "./SelectedDocumentPanel";
 
 const DocumentContainer = props => {
+  const [selectedDocument, setSelectedDocument] = useState(null);
+
   const renderPads = () => {
     if (!!props.pads) {
       return props.pads.map((pad, i) => {
-        return <DocumentOverview key={i} pad={pad} />;
+        return (
+          <DocumentOverview
+            isSelectedDocument={isSelectedDocument(pad, selectedDocument)}
+            setDocument={pad => setSelectedDocument(pad)}
+            key={i}
+            pad={pad}
+          />
+        );
       });
     }
+  };
+
+  const isSelectedDocument = (document, selectedDocument) => {
+    if (!!selectedDocument) {
+      if (
+        document.id === selectedDocument.id &&
+        !!document.pad_code === !!selectedDocument.pad_code
+      )
+        return true;
+      else return false;
+    } else return false;
   };
 
   return (
@@ -33,7 +54,7 @@ const DocumentContainer = props => {
         }
       >
         <div className="document-display-body-left">
-          selected project details / project log
+          <SelectedDocumentPanel document={selectedDocument} />
         </div>
         <div className="document-display-body-right">
           <div className="scroll-container y-scroll y-proximity">

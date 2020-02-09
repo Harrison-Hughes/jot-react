@@ -7,8 +7,8 @@ const InvitationElement = props => {
 
   useEffect(() => getProject(props.invitation.project_code), []);
 
-  const acceptInvitation = (invitationID, nickname) => {
-    API.acceptInvitation(invitationID, nickname);
+  const acceptInvitation = invitationID => {
+    API.acceptInvitation(invitationID, props.nickname);
   };
 
   const declineInvitation = invitationID => {
@@ -22,7 +22,7 @@ const InvitationElement = props => {
   return (
     <div>
       {!!project && (
-        <div>
+        <div className="invitation-element">
           <h4>
             {project.name}, {props.invitation.project_code}
           </h4>
