@@ -29,6 +29,7 @@ const HomeBody = ({ user, invitations }) => {
           newProjectForm={newProjectForm}
           joinProjectForm={joinProjectForm}
           invitationsList={invitationsList}
+          numberOfInvitations={invitations.length}
           toggleNewProject={() => setNewProjectForm(!newProjectForm)}
           toggleJoinProject={() => setJoinProjectForm(!joinProjectForm)}
           toggleInvitationsList={() => setInvitationsList(!invitationsList)}

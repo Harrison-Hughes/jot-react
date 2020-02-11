@@ -23,6 +23,9 @@ const ProjectBody = props => {
         />
       )}
       <DocumentContainer
+        nickname={props.nickname}
+        project={props.project}
+        access={props.access}
         someFormPresent={props.someFormPresent}
         showNewDocumentForm={props.showNewDocumentForm}
         toggleNewDoc={() => props.toggleNewDoc()}

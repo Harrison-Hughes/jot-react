@@ -4,9 +4,21 @@ import React, { useState, useEffect } from "react";
 const ProjectContainer = props => {
   const renderPoints = () => {
     if (!!props.pad.points) {
-      // let pointsClone = Object.assign({}, props.pad.points);
       return props.pad.points.map((point, i) => {
-        return <BulletPoint key={i}>{point.text}</BulletPoint>;
+        return (
+          <BulletPoint
+            isSelectedPoint={
+              !!props.selectedPoint && props.selectedPoint.id === point.id
+                ? true
+                : false
+            }
+            onClick={() => props.setSelectedPoint(point)}
+            id={point.id}
+            key={i}
+          >
+            {point.text}
+          </BulletPoint>
+        );
       });
     }
   };
@@ -19,9 +31,15 @@ const ProjectContainer = props => {
   );
 };
 
-const BulletPoint = ({ children, ...props }) => {
+const BulletPoint = ({ children, isSelectedPoint, ...props }) => {
+  const classNameSelector = () => {
+    if (isSelectedPoint) {
+      return "selected-point bullet-point";
+    } else return "bullet-point";
+  };
+
   return (
-    <li className="bullet-point" {...props}>
+    <li className={classNameSelector()} {...props}>
       {children}
     </li>
   );

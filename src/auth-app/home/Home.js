@@ -11,7 +11,6 @@ const Home = props => {
   useEffect(() => fetchInvitations(), []);
 
   const fetchInvitations = () => {
-    console.log(props.user.user_code);
     API.myInvitations(props.user.user_code).then(resp => {
       if (!!resp.error) {
         console.log(resp.error);

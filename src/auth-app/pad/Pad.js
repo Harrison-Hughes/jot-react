@@ -11,6 +11,13 @@ import "./Pad.css";
 const Pad = ({ user, location, match }) => {
   const [pad, setPad] = useState([]);
   const { params } = match;
+  const {
+    project_name,
+    project_code,
+    valid,
+    access,
+    nickname
+  } = location.state;
 
   useEffect(() => {
     fetchPad();
@@ -22,20 +29,48 @@ const Pad = ({ user, location, match }) => {
     }
   };
 
-  const handleReceivedPoint = point => {
-    let padClone = Object.assign({}, pad);
-    let newPoints = [...padClone.points, point];
-    padClone.points = newPoints;
-    setPad(padClone);
+  const handleReceivedPoint = resp => {
+    if (!!resp.point) {
+      let padClone = Object.assign({}, pad);
+      let newPoints = [...padClone.points, resp.point];
+      padClone.points = newPoints;
+      setPad(padClone);
+    }
+    if (!!resp.json && !!resp.json.action) {
+      if (resp.json.action === "delete") {
+        let padClone = Object.assign({}, pad);
+        let newPoints = padClone.points.filter(p => p.id !== resp.json.id);
+        padClone.points = newPoints;
+        setPad(padClone);
+      } else if (resp.json.action === "update") {
+        let padClone = Object.assign({}, pad);
+        let newPoints = padClone.points.map(point => {
+          if (point.id !== resp.json.id) return point;
+          else {
+            let pointClone = Object.assign({}, point);
+            pointClone.text = resp.json.text;
+            return pointClone;
+          }
+        });
+        padClone.points = newPoints;
+        setPad(padClone);
+      }
+    }
   };
 
   return (
     <>
-      {location.state.valid ? (
+      {valid ? (
         <div className="pad-page">
-          <PadHeader />
+          <PadHeader
+            projectName={project_name}
+            projectCode={project_code}
+            access={access}
+          />
           <ActionCableProvider url={API_WS_ROOT}>
             <PadBody
+              nickname={nickname}
+              access={access}
               user={user}
               pad={pad}
               fetchPad={() => fetchPad()}

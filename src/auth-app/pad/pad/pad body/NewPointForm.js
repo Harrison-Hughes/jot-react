@@ -21,7 +21,7 @@ const NewPointForm = props => {
     API.newPoint(
       formData.text,
       formData.location,
-      `${props.user.user_code}`,
+      `${props.nickname}`,
       props.padId
     ).then(() => props.refetch());
     setFormData({ text: "", location: "temp", author: "" });
@@ -33,8 +33,8 @@ const NewPointForm = props => {
         <textarea
           className="new-point-textarea-input"
           onChange={handleTextChange}
-          rows="4"
-          cols="50"
+          rows="3"
+          cols="30"
           name="text"
           placeholder="new point"
           value={formData.text}

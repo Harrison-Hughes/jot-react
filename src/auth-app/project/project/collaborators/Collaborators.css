@@ -22,6 +22,17 @@
   grid-template-columns: 5fr 2fr 2fr;
 }
 
+.collaborator-component-admin {
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: khaki;
+  border-radius: 3px;
+
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr 6fr;
+}
+
 .collaborator-key {
   place-self: center;
   padding: 2px 3px;
@@ -31,6 +42,26 @@
 
   display: grid;
   grid-template-columns: 4fr 2fr 2fr;
+}
+
+.users-own-component {
+  background: darkseagreen;
+}
+
+.collaborator-key-admin {
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: lavender;
+  border-radius: 3px;
+
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr 6fr;
+}
+
+.access-button-panel {
+  display: grid;
+  grid-template-columns: 3fr 3fr 2fr;
 }
 
 .collaborator-container {

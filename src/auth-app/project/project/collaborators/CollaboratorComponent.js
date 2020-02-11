@@ -1,19 +1,25 @@
-import React, { useEffect } from "react";
+import React from "react";
 
-const CollaboratorComponent = ({ keyCard, collaborator }) => {
+const CollaboratorComponent = ({ admin, keyCard, collaborator, user }) => {
   return (
     <>
       {keyCard ? (
-        <div className="collaborator-key">
+        <div className={admin ? `collaborator-key-admin` : `collaborator-key`}>
           <div>nickname</div>
           <div>user code</div>
           <div>access</div>
         </div>
       ) : (
-        <div className="collaborator-component">
+        <div
+          className={
+            user.user_code === collaborator.user_code
+              ? "collaborator-component users-own-component"
+              : "collaborator-component"
+          }
+        >
           <div className="collaborator-nickname">{collaborator.nickname}</div>
           <div className="collaborator-code">{collaborator.user_code}</div>
-          <div className="collaborator-access">access</div>
+          <div className="collaborator-access">{collaborator.access}</div>
         </div>
       )}
     </>

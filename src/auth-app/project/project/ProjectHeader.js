@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Button from "../../../elements/Button";
 import { Link } from "react-router-dom";
 
@@ -31,7 +31,7 @@ const ProjectHeader = props => {
       </div>
       <div className="h6">
         <Button thin onClick={props.toggleShowEditProject}>
-          {props.showEditProject ? "cancel" : "edit project"}
+          {props.showEditProject ? "cancel" : "options"}
         </Button>
       </div>
       <div className="h7">

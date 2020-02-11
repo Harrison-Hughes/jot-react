@@ -54,7 +54,12 @@ const DocumentContainer = props => {
         }
       >
         <div className="document-display-body-left">
-          <SelectedDocumentPanel document={selectedDocument} />
+          <SelectedDocumentPanel
+            project={props.project}
+            access={props.access}
+            document={selectedDocument}
+            nickname={props.nickname}
+          />
         </div>
         <div className="document-display-body-right">
           <div className="scroll-container y-scroll y-proximity">

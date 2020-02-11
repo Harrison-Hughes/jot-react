@@ -5,7 +5,6 @@ import { withRouter } from "react-router-dom";
 import { API_WS_ROOT } from "../../constants/index";
 import { ActionCableProvider } from "react-actioncable-provider";
 import CollaboratorList from "./project/collaborators/CollaboratorList";
-import UpdateLog from "./project/project body/UpdateLog";
 import API from "../../adapters/API";
 import NewDocumentForm from "./project/NewDocumentForm";
 import "./Project.css";
@@ -27,19 +26,27 @@ const Project = ({ match, user }) => {
     access: ""
   });
 
-  useEffect(() => fetchCollaborators(), []);
+  useEffect(() => fetchCollaborators(), [project]);
   useEffect(() => fetchProject(), []);
   useEffect(() => fetchCollaboration(), [project]);
 
   const fetchCollaborators = () => {
-    if (API.hasToken) {
+    if (!!project) {
       API.getCollaborators(params.projectCode).then(setCollaborators);
     }
   };
 
+  const moreThanOneAdmin = () => {
+    if (collaborators.length > 0) {
+      if (collaborators.filter(c => c.access === "admin").length > 1)
+        return true;
+      else return false;
+    } else return false;
+  };
+
   const fetchCollaboration = () => {
     if (!!project) {
-      API.getCollaboration(project.id, user.id).then(resp =>
+      API.getCollaboration(project.project_code, user.user_code).then(resp =>
         setCollaboration({
           created_at: resp[0].created_at,
           nickname: resp[0].nickname,
@@ -89,7 +96,9 @@ const Project = ({ match, user }) => {
       <ActionCableProvider url={API_WS_ROOT}>
         <ProjectBody
           passProjectUp={project => setProject(project)}
+          access={collaboration.access}
           project={project}
+          nickname={collaboration.nickname}
           toggleNewDoc={() => {
             if (!showNewDocumentForm) {
               setShowCollaborators(false);
@@ -106,15 +115,22 @@ const Project = ({ match, user }) => {
         />
       </ActionCableProvider>
       <CollaboratorList
+        user={user}
         access={collaboration.access}
         collaborators={collaborators}
         showCollaborators={showCollaborators}
         toggleShowCollaborators={() => setShowCollaborators(!showCollaborators)}
         projectCode={params.projectCode}
+        project={project}
         inviteUser={userCode => inviteUser(userCode)}
       />
-      <EditProjectForm showEditForm={showEditProject} />
-      <UpdateLog />
+      <EditProjectForm
+        user={user}
+        project={project}
+        access={collaboration.access}
+        showEditForm={showEditProject}
+        moreThanOneAdmin={() => moreThanOneAdmin()}
+      />
       {!!project && (
         <NewDocumentForm
           projectId={project.id}

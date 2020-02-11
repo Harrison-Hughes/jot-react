@@ -10,9 +10,9 @@ const ProjectCard = props => {
   useEffect(() => fetchAccess(), []);
 
   const fetchAccess = () => {
-    API.getCollaboration(props.projectID, props.userID).then(resp =>
-      setAccess(resp[0].access)
-    );
+    API.getCollaboration(props.code, props.userCode).then(resp => {
+      if (!!resp[0]) setAccess(resp[0].access);
+    });
   };
 
   return (

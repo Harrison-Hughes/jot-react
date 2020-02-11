@@ -30,6 +30,8 @@
 
 .project-container-header-left {
   place-self: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .project-container-header-middle {
@@ -38,8 +40,6 @@
 
 .project-container-header-right {
   place-self: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 }
 
 .project-container-body {

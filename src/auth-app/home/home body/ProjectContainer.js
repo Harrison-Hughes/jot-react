@@ -16,7 +16,7 @@ const ProjectContainer = props => {
           <div key={i} className="project-container-project-card element">
             <ProjectCard
               projectID={project.id}
-              userID={props.user.id}
+              userCode={props.user.user_code}
               unflippable={props.newProjectForm || props.joinProjectForm}
               title={project.name}
               code={project.project_code}
@@ -42,6 +42,11 @@ const ProjectContainer = props => {
           <ShowInvitationsButton
             active={props.invitationsList}
             toggleInvitationsList={props.toggleInvitationsList}
+            numberOfInvitations={props.numberOfInvitations}
+          />
+          <JoinProjectButton
+            active={props.joinProjectForm}
+            toggleJoinProject={props.toggleJoinProject}
           />
         </div>
         <div className="project-container-header-middle">
@@ -51,10 +56,6 @@ const ProjectContainer = props => {
           <NewProjectButton
             active={props.newProjectForm}
             toggleNewProject={props.toggleNewProject}
-          />
-          <JoinProjectButton
-            active={props.joinProjectForm}
-            toggleJoinProject={props.toggleJoinProject}
           />
         </div>
       </div>

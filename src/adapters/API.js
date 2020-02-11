@@ -115,14 +115,37 @@ const getPad = padCode =>
     headers: HEADERS_AUTH
   }).then(jsonify);
 
-const getCollaboration = (projectID, userID) =>
-  fetch(`${API_ROOT}/getCollaboration/${userID}/${projectID}`, {
+const editPad = (padCode, name, description) =>
+  fetch(`${API_ROOT}/editPad/${padCode}`, {
+    method: "PATCH",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      pad: {
+        name: name,
+        description: description
+      }
+    })
+  }).then(jsonify);
+
+const editPoint = (pointID, text) =>
+  fetch(`${API_ROOT}/editPoint/${pointID}`, {
+    method: "PATCH",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      pad: {
+        text: text
+      }
+    })
+  }).then(jsonify);
+
+const getCollaboration = (projectCode, userCode) =>
+  fetch(`${API_ROOT}/getCollaboration/${userCode}/${projectCode}`, {
     method: "GET",
     headers: HEADERS_AUTH
   }).then(jsonify);
 
-const deletePad = padID =>
-  fetch(`${API_ROOT}/deletePad/${padID}`, {
+const deletePad = pad_code =>
+  fetch(`${API_ROOT}/deletePad/${pad_code}`, {
     method: "DELETE",
     headers: HEADERS_AUTH
   });
@@ -182,14 +205,20 @@ const leaveProject = (userID, projectID) =>
     headers: HEADERS_AUTH
   });
 
+const removeUserFromProject = (userCode, projectCode) =>
+  fetch(`${API_ROOT}/removeUserFromProject/${userCode}/${projectCode}`, {
+    method: "DELETE",
+    headers: HEADERS_AUTH
+  });
+
 const deletePoint = pointID =>
   fetch(`${API_ROOT}/deletePoint/${pointID}`, {
     method: "DELETE",
     headers: HEADERS_AUTH
   });
 
-const updateProject = (name, description, default_access, open) =>
-  fetch(`${API_ROOT}/updateProject`, {
+const updateProject = (projectCode, name, description, default_access, open) =>
+  fetch(`${API_ROOT}/updateProject/${projectCode}`, {
     method: "PATCH",
     headers: HEADERS_AUTH,
     body: JSON.stringify({
@@ -213,6 +242,28 @@ const updateDefaultNickname = (userID, nickname) =>
     })
   });
 
+const updateCollaborationAccess = (userCode, projectCode, access) =>
+  fetch(`${API_ROOT}/updateCollaborationAccess/${userCode}/${projectCode}`, {
+    method: "PATCH",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      collaboration: {
+        access: access
+      }
+    })
+  });
+
+const updateCollaborationNickname = (userCode, projectCode, nickname) =>
+  fetch(`${API_ROOT}/updateCollaborationAccess/${userCode}/${projectCode}`, {
+    method: "PATCH",
+    headers: HEADERS_AUTH,
+    body: JSON.stringify({
+      collaboration: {
+        nickname: nickname
+      }
+    })
+  });
+
 export default {
   signin,
   signup,
@@ -224,6 +275,7 @@ export default {
   getCollaborators,
   newPoint,
   getPad,
+  editPad,
   getCollaboration,
   deletePad,
   joinProjectIfOpen,
@@ -232,9 +284,13 @@ export default {
   declineInvitation,
   myInvitations,
   leaveProject,
+  removeUserFromProject,
   deletePoint,
+  editPoint,
   updateProject,
   updateDefaultNickname,
+  updateCollaborationAccess,
+  updateCollaborationNickname,
   hasToken: !!localStorage.token,
   clearToken: () => localStorage.removeItem("token")
 };

@@ -1,0 +1,29 @@
+.admin-project-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.edit-project-form {
+  place-self: center;
+  max-width: 500px;
+  padding: 10px 20px;
+  margin: 10px auto;
+  padding: 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
+
+.edit-project-form label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.delete-project {
+  place-self: center;
+  max-width: 500px;
+  padding: 10px 20px;
+  margin: 10px auto;
+  padding: 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}

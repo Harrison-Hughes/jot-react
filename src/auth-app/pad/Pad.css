@@ -4,8 +4,8 @@
 
   background-color: gainsboro;
   display: grid;
-  grid-template-columns: 5% 25% auto 5%;
-  grid-template-rows: 5% auto 5%;
+  grid-template-columns: 5% auto 5%;
+  grid-template-rows: 10% auto 5%;
   /* font-family: "Roboto", sans-serif; */
   font-family: "Montserrat", sans-serif;
 }
@@ -18,10 +18,10 @@
   /* font-family: "Roboto", sans-serif; */
   font-family: "Montserrat", sans-serif;
   place-self: center;
-  grid-area: 2 / 3 / 3 / 4;
+  grid-area: 2 / 2 / 3 / 3;
 
   display: grid;
-  grid-template-columns: 5% auto 5%;
+  grid-template-columns: 15% 1fr 15%;
   grid-template-rows: 2% auto 10% 1%;
 }
 
@@ -34,7 +34,7 @@
   /* font-family: "Roboto", sans-serif; */
   font-family: "Montserrat", sans-serif;
   place-self: center;
-  grid-area: 2 / 2 / 3 / 3;
+  grid-area: 1 / 1 / 2 / 4;
 
   display: grid;
   /* rows: ; */
@@ -54,17 +54,18 @@
 
 .pad-container {
   grid-area: 2/2/3/3;
+  overflow: scroll;
 }
 
 .new-point-form-container {
-  grid-area: 3/1/5/4;
+  grid-area: 3/1/5/5;
   width: 100%;
   max-height: 100%;
 
-  background-color: rgb(92, 92, 202);
+  background-color: lightgrey;
 
   display: grid;
-  grid-template-columns: 5% auto 5%;
+  grid-template-columns: 5% 1fr 2fr 5%;
   grid-template-rows: 5% auto 5%;
 }
 
@@ -74,6 +75,46 @@
 
   display: grid;
   grid-template-columns: 4fr 1fr;
+}
+
+.selected-point-container {
+  place-self: center;
+  width: 100%;
+  height: 100%;
+
+  grid-area: 2/3/3/4;
+  max-height: 100%;
+
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.selected-point-left {
+  width: 100%;
+  /* place-self: center; */
+  grid-area: 1/1/2/2;
+}
+
+.selected-point-right {
+  width: 100%;
+  /* place-self: center; */
+  grid-area: 1/2/2/3;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.center {
+  place-self: center;
+}
+
+.selected-point-right-lower {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.selected-point {
+  grid-area: 2/3/3/4;
+  max-height: 100%;
 }
 
 .new-point-form-left {
@@ -104,6 +145,10 @@
   background-color: cornsilk;
   border-width: 1px;
   border-style: solid;
+}
+
+.selected-point {
+  background-color: rgb(219, 208, 208);
 }
 
 .bullet-point:hover {
