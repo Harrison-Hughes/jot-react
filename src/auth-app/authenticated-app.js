@@ -13,7 +13,7 @@ const AuthenticatedApp = props => {
           <Home logOut={() => props.logOut()} user={props.user} />
         </Route>
         <Route exact path="/project/:projectCode">
-          <Project />
+          <Project user={props.user} />
         </Route>
         <Route exact path="/pad/:padCode">
           <Pad user={props.user} />

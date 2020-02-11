@@ -1,0 +1,18 @@
+.document-form-style-5 {
+  place-self: center;
+  max-width: 500px;
+  padding: 10px 20px;
+  margin: 10px auto;
+  padding: 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+}
+
+.document-form-style-5 label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.document-form-field {
+  margin: 10px;
+}

@@ -1,20 +1,47 @@
-import React, { useEffect } from "react";
-import NewPointButton from "./NewPointButton";
+import React, { useState, useEffect } from "react";
+// import NewPointButton from "./NewPointButton";
 
 const ProjectContainer = props => {
   const renderPoints = () => {
-    if (!!props.points) {
-      return props.points.map((point, i) => {
-        return <li key={i}>{point.text}</li>;
+    if (!!props.pad.points) {
+      return props.pad.points.map((point, i) => {
+        return (
+          <BulletPoint
+            isSelectedPoint={
+              !!props.selectedPoint && props.selectedPoint.id === point.id
+                ? true
+                : false
+            }
+            onClick={() => props.setSelectedPoint(point)}
+            id={point.id}
+            key={i}
+          >
+            {point.text}
+          </BulletPoint>
+        );
       });
     }
   };
 
   return (
-    <div className="project-container">
+    <div className="pad-container">
+      <h2>{props.pad.name}</h2>
       <ul className="points-list">{renderPoints()}</ul>
-      <NewPointButton toggleNewPoint={props.toggleNewPoint} />
     </div>
+  );
+};
+
+const BulletPoint = ({ children, isSelectedPoint, ...props }) => {
+  const classNameSelector = () => {
+    if (isSelectedPoint) {
+      return "selected-point bullet-point";
+    } else return "bullet-point";
+  };
+
+  return (
+    <li className={classNameSelector()} {...props}>
+      {children}
+    </li>
   );
 };
 

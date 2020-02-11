@@ -1,11 +1,7 @@
 .container {
   height: 100vh;
   width: 100%;
-  background-image: linear-gradient(
-    -45deg,
-    rgb(124, 250, 112),
-    rgb(247, 250, 82)
-  );
+  background-color: gainsboro;
   display: grid;
   grid-template-columns: 5% auto 5%;
   grid-template-rows: 1% 15% auto 10% 1%;
@@ -13,13 +9,11 @@
 
 .header {
   color: white;
-  background-image: linear-gradient(
-    -45deg,
-    rgb(250, 191, 82),
-    rgb(250, 112, 112)
-  );
+  width: 100%;
+  background-color: rgb(0, 139, 139);
   border-radius: 10px;
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
   place-self: center;
   grid-area: 2 / 2 / 3 / 3;
 
@@ -30,13 +24,10 @@
 .home-body {
   height: 100%;
   width: 100%;
-  background-image: linear-gradient(
-    -45deg,
-    rgb(250, 191, 82),
-    rgb(250, 112, 112)
-  );
+  background-color: rgb(0, 139, 139);
   border-radius: 10px;
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
   place-self: center;
   grid-area: 3 / 2 / 4 / 3;
 }
@@ -66,5 +57,15 @@
 }
 .h5 {
   grid-column: 5 / 6;
+  place-self: center;
+}
+
+.h6 {
+  grid-column: 6 / 7;
+  place-self: center;
+}
+
+.h7 {
+  grid-column: 7 / 8;
   place-self: center;
 }

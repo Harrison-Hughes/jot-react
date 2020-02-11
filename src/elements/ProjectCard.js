@@ -1,9 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import API from "../adapters/API";
 import { Link } from "react-router-dom";
 
 import "./ProjectCard.css";
 
 const ProjectCard = props => {
+  const [access, setAccess] = useState("-");
+
+  useEffect(() => fetchAccess(), []);
+
+  const fetchAccess = () => {
+    API.getCollaboration(props.code, props.userCode).then(resp => {
+      if (!!resp[0]) setAccess(resp[0].access);
+    });
+  };
+
   return (
     <div className={props.unflippable ? "project-card-static" : "project-card"}>
       <div className="project-card-inner">
@@ -17,7 +28,7 @@ const ProjectCard = props => {
             <div className="right">project code:</div>{" "}
             <div className="left">{props.code}</div>
             <div className="right">your access:</div>{" "}
-            <div className="left">{props.access}</div>
+            <div className="left">{access}</div>
             <div className="right">status:</div>{" "}
             <div className="left">{props.status}</div>
             <div className="right">last edited:</div>{" "}

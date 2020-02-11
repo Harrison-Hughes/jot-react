@@ -1,11 +1,11 @@
 import React from "react";
-import Button from "../../../elements/Button";
+import Button from "../../../../elements/Button";
 
 const NewProjectButton = props => {
   return (
     <div className="new-project">
       <Button onClick={() => props.toggleNewProject()}>
-        {props.active ? "cancel new project" : "new project"}
+        {props.active ? "cancel" : "new project"}
       </Button>
     </div>
   );

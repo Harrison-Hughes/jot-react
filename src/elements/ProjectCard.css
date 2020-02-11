@@ -6,6 +6,8 @@
   border-radius: 10px;
   padding: 10px;
   place-self: center;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
 }
 
 .project-card-static {
@@ -41,7 +43,7 @@
 }
 
 .project-card-front {
-  background-color: ivory;
+  background-color: cornsilk;
   color: black;
 }
 

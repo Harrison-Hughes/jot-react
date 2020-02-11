@@ -1,0 +1,96 @@
+.collaborator-background {
+  place-self: center;
+  max-width: 100%;
+  padding: 10px 20px;
+  margin: 10px auto;
+  padding: 20px;
+  background: #f4f7f8;
+  border-radius: 8px;
+
+  display: grid;
+  grid-template-rows: 5fr 2fr;
+}
+
+.collaborator-component {
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: khaki;
+  border-radius: 3px;
+
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr;
+}
+
+.collaborator-component-admin {
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: khaki;
+  border-radius: 3px;
+
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr 6fr;
+}
+
+.collaborator-key {
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: lavender;
+  border-radius: 3px;
+
+  display: grid;
+  grid-template-columns: 4fr 2fr 2fr;
+}
+
+.users-own-component {
+  background: darkseagreen;
+}
+
+.collaborator-key-admin {
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: lavender;
+  border-radius: 3px;
+
+  display: grid;
+  grid-template-columns: 5fr 2fr 2fr 6fr;
+}
+
+.access-button-panel {
+  display: grid;
+  grid-template-columns: 3fr 3fr 2fr;
+}
+
+.collaborator-container {
+  overflow: scroll;
+}
+
+.collaborator-nickname {
+  width: 85%;
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: rgb(193, 193, 248);
+  border-radius: 3px;
+}
+
+.collaborator-code {
+  width: 85%;
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: rgb(193, 193, 248);
+  border-radius: 3px;
+}
+
+.collaborator-access {
+  width: 85%;
+  place-self: center;
+  padding: 2px 3px;
+  margin: 3px auto;
+  background: rgb(193, 193, 248);
+  border-radius: 3px;
+}

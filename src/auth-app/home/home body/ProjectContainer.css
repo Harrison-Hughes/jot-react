@@ -5,6 +5,8 @@
   display: grid;
   grid-template-columns: 3% 1fr 3%;
   grid-template-rows: 1% 10% auto 10% 1%;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
 }
 
 .project-container-header {
@@ -13,7 +15,8 @@
   height: 100%;
   width: 100%;
   border-radius: 10px;
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Montserrat", sans-serif;
   place-self: center;
   grid-area: 2 / 2 / 3 / 3;
 
@@ -27,6 +30,8 @@
 
 .project-container-header-left {
   place-self: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 
 .project-container-header-middle {
@@ -39,16 +44,18 @@
 
 .project-container-body {
   box-sizing: border-box;
-  height: 100%;
+  height: 50vh;
   width: 100%;
 
-  font-family: sans, Arial, Helvetica Neue, sans-serif;
+  font-family: "Roboto", sans-serif;
   place-self: center;
   grid-area: 3 / 2 / 4 / 3;
 
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  grid-template-rows: 3fr 3fr 2fr;
+  grid-template-rows: 1fr;
+
+  overflow: scroll;
 }
 
 .project-container-body.blur {
@@ -57,4 +64,26 @@
   -o-filter: blur(5px);
   -ms-filter: blur(5px);
   filter: blur(5px);
+}
+
+.y-proximity {
+  scroll-snap-type: y proximity;
+}
+
+.wrapper {
+  height: 70%;
+}
+
+.element {
+  scroll-margin: 10px;
+  scroll-snap-align: start;
+  scroll-snap-stop: normal;
+}
+
+.join-project {
+  place-self: center;
+}
+
+.new-project {
+  place-self: center;
 }

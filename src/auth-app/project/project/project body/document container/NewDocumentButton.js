@@ -4,7 +4,9 @@ import Button from "../../../../../elements/Button";
 const NewDocumentButton = props => {
   return (
     <div className="new document">
-      <Button onClick={() => props.toggleNewDoc()}>new document</Button>
+      <Button thin onClick={() => props.toggleNewDoc()}>
+        {props.on ? "cancel new document" : "new document"}
+      </Button>
     </div>
   );
 };
