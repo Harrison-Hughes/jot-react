@@ -4,10 +4,8 @@ import Button from "../../../../elements/Button";
 const ShowInvitationsButton = props => {
   return (
     <div className="join-invitations">
-      <Button onClick={() => props.toggleInvitationsList()}>
-        {props.active
-          ? "cancel"
-          : `show ${props.numberOfInvitations} invitation(s)`}
+      <Button thin onClick={() => props.engageInvitationsList()}>
+        show {props.numberOfInvitations} invitation(s)
       </Button>
     </div>
   );

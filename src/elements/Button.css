@@ -4,8 +4,8 @@
   font-family: "Montserrat", sans-serif;
   font-size: 1rem;
   border-radius: 5px;
-  border: solid 1px rgb(10, 97, 97);
-  color: white;
+  border: solid 1px whitesmoke;
+  color: whitesmoke;
   background: transparent;
 
   margin: 5px;
@@ -14,7 +14,7 @@
 }
 
 .button:hover {
-  color: rgb(10, 97, 97);
+  color: rgb(59, 59, 59);
   background: white;
   cursor: pointer;
 }

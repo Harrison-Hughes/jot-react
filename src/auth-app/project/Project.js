@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import ProjectHeader from "./project/ProjectHeader";
 import ProjectBody from "./project/ProjectBody";
 import { withRouter } from "react-router-dom";
-import { API_WS_ROOT } from "../../constants/index";
-import { ActionCableProvider } from "react-actioncable-provider";
 import CollaboratorList from "./project/collaborators/CollaboratorList";
 import API from "../../adapters/API";
 import NewDocumentForm from "./project/NewDocumentForm";
@@ -14,6 +12,7 @@ const Project = ({ match, user }) => {
   const { params } = match;
 
   const [project, setProject] = useState(null);
+  const [errorPage, setErrorPage] = useState(false);
 
   const [showCollaborators, setShowCollaborators] = useState(false);
   const [showNewDocumentForm, setShowNewDocumentForm] = useState(false);
@@ -46,13 +45,15 @@ const Project = ({ match, user }) => {
 
   const fetchCollaboration = () => {
     if (!!project) {
-      API.getCollaboration(project.project_code, user.user_code).then(resp =>
-        setCollaboration({
-          created_at: resp[0].created_at,
-          nickname: resp[0].nickname,
-          access: resp[0].access
-        })
-      );
+      API.getCollaboration(project.project_code, user.user_code).then(resp => {
+        !!resp[0]
+          ? setCollaboration({
+              created_at: resp[0].created_at,
+              nickname: resp[0].nickname,
+              access: resp[0].access
+            })
+          : setErrorPage(true);
+      });
     }
   };
 
@@ -69,31 +70,33 @@ const Project = ({ match, user }) => {
     !!project && API.sendInvitation(userCode, project.project_code);
   };
 
-  return (
-    <div className="project-page">
-      <ProjectHeader
-        toggleShowCollaborators={() => {
-          if (!showCollaborators) {
-            setShowNewDocumentForm(false);
-            setShowEditProject(false);
-          }
-          setShowCollaborators(!showCollaborators);
-        }}
-        showCollaborators={showCollaborators}
-        project={project}
-        nickname={collaboration.nickname}
-        access={collaboration.access}
-        projectCode={params.projectCode}
-        showEditProject={showEditProject}
-        toggleShowEditProject={() => {
-          if (!showEditProject) {
-            setShowNewDocumentForm(false);
-            setShowCollaborators(false);
-          }
-          setShowEditProject(!showEditProject);
-        }}
-      />
-      <ActionCableProvider url={API_WS_ROOT}>
+  if (!!errorPage)
+    return <div>please refresh the page - sorry for the inconvenience</div>;
+  else
+    return (
+      <div className="project-page">
+        <ProjectHeader
+          toggleShowCollaborators={() => {
+            if (!showCollaborators) {
+              setShowNewDocumentForm(false);
+              setShowEditProject(false);
+            }
+            setShowCollaborators(!showCollaborators);
+          }}
+          showCollaborators={showCollaborators}
+          project={project}
+          nickname={collaboration.nickname}
+          access={collaboration.access}
+          projectCode={params.projectCode}
+          showEditProject={showEditProject}
+          toggleShowEditProject={() => {
+            if (!showEditProject) {
+              setShowNewDocumentForm(false);
+              setShowCollaborators(false);
+            }
+            setShowEditProject(!showEditProject);
+          }}
+        />
         <ProjectBody
           passProjectUp={project => setProject(project)}
           access={collaboration.access}
@@ -113,34 +116,35 @@ const Project = ({ match, user }) => {
               : false
           }
         />
-      </ActionCableProvider>
-      <CollaboratorList
-        user={user}
-        access={collaboration.access}
-        collaborators={collaborators}
-        showCollaborators={showCollaborators}
-        toggleShowCollaborators={() => setShowCollaborators(!showCollaborators)}
-        projectCode={params.projectCode}
-        project={project}
-        inviteUser={userCode => inviteUser(userCode)}
-      />
-      <EditProjectForm
-        user={user}
-        project={project}
-        access={collaboration.access}
-        showEditForm={showEditProject}
-        moreThanOneAdmin={() => moreThanOneAdmin()}
-      />
-      {!!project && (
-        <NewDocumentForm
-          projectId={project.id}
-          refetch={() => fetchProject()}
-          showNewDocumentForm={showNewDocumentForm}
-          toggleNewDoc={() => setShowNewDocumentForm(!showNewDocumentForm)}
+        <CollaboratorList
+          user={user}
+          access={collaboration.access}
+          collaborators={collaborators}
+          showCollaborators={showCollaborators}
+          toggleShowCollaborators={() =>
+            setShowCollaborators(!showCollaborators)
+          }
+          projectCode={params.projectCode}
+          project={project}
+          inviteUser={userCode => inviteUser(userCode)}
         />
-      )}
-    </div>
-  );
+        <EditProjectForm
+          user={user}
+          project={project}
+          access={collaboration.access}
+          showEditForm={showEditProject}
+          moreThanOneAdmin={() => moreThanOneAdmin()}
+        />
+        {!!project && (
+          <NewDocumentForm
+            projectId={project.id}
+            refetch={() => fetchProject()}
+            showNewDocumentForm={showNewDocumentForm}
+            toggleNewDoc={() => setShowNewDocumentForm(!showNewDocumentForm)}
+          />
+        )}
+      </div>
+    );
 };
 
 export default withRouter(Project);

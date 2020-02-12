@@ -4,8 +4,8 @@ import Button from "../../../../elements/Button";
 const JoinProjectButton = props => {
   return (
     <div className="join-project">
-      <Button onClick={() => props.toggleJoinProject()}>
-        {props.active ? "cancel" : "find project"}
+      <Button thin onClick={() => props.engageJoinProject()}>
+        find project
       </Button>
     </div>
   );

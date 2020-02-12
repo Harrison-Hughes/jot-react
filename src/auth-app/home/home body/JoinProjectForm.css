@@ -1,14 +1,17 @@
-.form-style-5 {
+/* .form-style-5 {
   place-self: center;
-  /* max-width: 500px; */
   padding: 10px 20px;
   background: cornsilk;
   margin: 10px auto;
   padding: 20px;
   background: #f4f7f8;
   border-radius: 8px;
-  /* font-family: "Roboto", sans-serif; */
   font-family: "Montserrat", sans-serif;
+}
+
+input[type="text"] {
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
 }
 
 .form-style-5 label {
@@ -18,4 +21,16 @@
 
 .form-field {
   margin: 10px;
+} */
+
+input[type="text"] {
+  font-family: "Montserrat", sans-serif;
+  /* font-variant: small-caps; */
+  font-size: 16px;
+}
+
+button {
+  font-family: "Montserrat", sans-serif;
+  /* font-variant: small-caps; */
+  font-size: 16px;
 }

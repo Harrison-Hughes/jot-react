@@ -63,6 +63,7 @@ const JoinProjectForm = props => {
             value="join project"
           />
         </form>
+        <button onClick={() => props.quitForm()}>cancel</button>
       </div>
     </FadeInDiv>
   );

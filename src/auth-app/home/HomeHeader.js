@@ -2,6 +2,7 @@ import React from "react";
 import Button from "../../elements/Button";
 
 const HomeHeader = props => {
+  // console.log("home header");
   return (
     <div className="home-header header">
       <div className="h1">

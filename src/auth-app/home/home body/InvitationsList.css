@@ -15,3 +15,9 @@
   display: grid;
   grid-template-columns: 5fr 1fr 1fr;
 }
+
+.tiny-warning {
+  margin: 0px;
+  color: red;
+  font-size: xx-small;
+}

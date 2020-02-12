@@ -9,41 +9,61 @@ import SignInForm from "./unauth-app/unauth-forms/SignInForm";
 
 const App = () => {
   const [user, setUser] = useState(null);
+  const [validatedUser, setValidatedUser] = useState(false);
+  const [error, setError] = useState(null);
 
   const logOut = () => {
     setUser(null);
     API.clearToken();
   };
 
+  useEffect(() => console.log(user), [user]);
+
   useEffect(() => {
     if (API.hasToken) {
-      API.validate().then(setUser);
+      API.validate()
+        .then(setUser)
+        .then(() => setValidatedUser(true))
+        .catch(errorPromise => {
+          errorPromise.then(data => {
+            setError(data);
+          });
+        });
+    } else {
+      setValidatedUser(true);
     }
   }, []);
 
-  return (
-    <Switch>
-      <Route exact path="/WelcomeToJot">
-        {!user ? (
-          <SignUpForm signIn={user => setUser(user)} />
+  if (!validatedUser)
+    return (
+      <div className="validating-screen">
+        please wait while we validate your user
+      </div>
+    );
+  else
+    return (
+      <Switch>
+        <Route exact path="/welcometojot">
+          {!user ? (
+            <SignUpForm signIn={user => setUser(user)} />
+          ) : (
+            <Redirect to="/homescreen" />
+          )}
+        </Route>
+        <Route exact path="/welcomeback">
+          {!user ? (
+            <SignInForm signIn={user => setUser(user)} />
+          ) : (
+            <Redirect to="/homescreen" />
+          )}
+        </Route>
+        {user ? (
+          <AuthenticatedApp user={user} logOut={() => logOut()} />
         ) : (
-          <Redirect to="/homescreen" />
+          <Redirect to="/welcomeback" />
         )}
-      </Route>
-      <Route exact path="/WelcomeBack">
-        {!user ? (
-          <SignInForm signIn={user => setUser(user)} />
-        ) : (
-          <Redirect to="/homescreen" />
-        )}
-      </Route>
-      {user ? (
-        <AuthenticatedApp user={user} logOut={() => logOut()} />
-      ) : (
-        <Redirect to="/WelcomeBack" />
-      )}
-    </Switch>
-  );
+      </Switch>
+    );
 };
 
 export default App;

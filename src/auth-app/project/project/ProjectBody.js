@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DocumentContainer from "./project body/DocumentContainer";
-import { ActionCable } from "react-actioncable-provider";
+import { ActionCable, ActionCableConsumer } from "react-actioncable-provider";
 
 const ProjectBody = props => {
   const [project, setProject] = useState(props.project);
@@ -17,9 +17,11 @@ const ProjectBody = props => {
   return (
     <div className="project-body">
       {project !== null && (
-        <ActionCable
+        <ActionCableConsumer
           channel={{ channel: "PadsChannel", project: project.id }}
           onReceived={resp => handleReceivedPad(resp.pad)}
+          onDisconnected={() => console.log("I'm disconnected, Pads channel")}
+          onConnected={() => console.log("I'm connected, Pads channel")}
         />
       )}
       <DocumentContainer
