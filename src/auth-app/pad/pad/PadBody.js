@@ -7,30 +7,9 @@ import SelectedPoint from "./pad body/SelectedPoint";
 const PadBody = props => {
   const [selectedPoint, setSelectedPoint] = useState(null);
 
-  useEffect(() => setSelectedPoint(selectedPoint), [selectedPoint]);
-
-  useEffect(() => {
-    if (props.cableConnection) {
-      const subscription = props.cableConnection.subscriptions.create(
-        { channel: "PointsChannel", pad: props.pad.id },
-        {
-          received: resp => props.handleReceivedPoint(resp)
-        }
-      );
-      // return () => {
-      //   // const sub = subscription;
-      //   // debugger;
-      //   subscription.unsubscribe();
-      // };
-    }
-  });
-
+  if (props.pad === null) return <h1>No pad yet...</h1>;
   return (
     <div className="pad-body">
-      {/* <ActionCableConsumer
-        channel={{ channel: "PointsChannel", pad: props.pad.id }}
-        onReceived={resp => props.handleReceivedPoint(resp)}
-      /> */}
       {props.pad !== [] && (
         <PointContainer
           setSelectedPoint={point => setSelectedPoint(point)}
@@ -45,7 +24,6 @@ const PadBody = props => {
             nickname={props.nickname}
             user={props.user}
             padId={props.pad.id}
-            // refetch={() => props.fetchPad()}
           />
           <SelectedPoint
             access={props.access}
@@ -53,7 +31,7 @@ const PadBody = props => {
             clearSelectedPoint={() => setSelectedPoint(null)}
             selectedPoint={selectedPoint}
           />
-          }{/* <ActionCableConsumer /> */}
+          }
         </div>
       )}
     </div>
