@@ -8,7 +8,7 @@ import NewDocumentForm from "./project/NewDocumentForm";
 import "./Project.css";
 import EditProjectForm from "./project/EditProjectForm";
 
-const Project = ({ match, user }) => {
+const Project = ({ match, user, cableConnection }) => {
   const { params } = match;
 
   const [project, setProject] = useState(null);
@@ -98,6 +98,7 @@ const Project = ({ match, user }) => {
           }}
         />
         <ProjectBody
+          cableConnection={cableConnection}
           passProjectUp={project => setProject(project)}
           access={collaboration.access}
           project={project}

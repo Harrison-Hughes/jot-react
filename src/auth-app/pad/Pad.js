@@ -5,7 +5,7 @@ import PadHeader from "./pad/PadHeader";
 import PadBody from "./pad/PadBody";
 import "./Pad.css";
 
-const Pad = ({ user, location, match }) => {
+const Pad = ({ user, location, match, cableConnection }) => {
   const [pad, setPad] = useState([]);
   const { params } = match;
 
@@ -32,7 +32,6 @@ const Pad = ({ user, location, match }) => {
 
   const handleReceivedPoint = resp => {
     console.log(resp);
-    debugger;
     if (!!resp.point) {
       let padClone = Object.assign({}, pad);
       let newPoints = [...padClone.points, resp.point];
@@ -73,6 +72,7 @@ const Pad = ({ user, location, match }) => {
             access={access}
           />
           <PadBody
+            cableConnection={cableConnection}
             nickname={nickname}
             access={access}
             user={user}
