@@ -21,11 +21,16 @@ const JoinProjectForm = props => {
       .then(resp => resp.json())
       .then(resp => {
         if (
-          resp.error === "collaboration already exists" ||
-          "project is closed"
+          !!resp.error
+          // === "collaboration already exists" ||
+          // "project is closed" ||
+          // "project not found"
         )
-          console.log(resp.error);
-        else props.refetch();
+          props.popUpErrorMessage(resp.error);
+        else {
+          props.refetch();
+          props.popUpSuccessMessage("project successfully joined");
+        }
       });
     setProjectCode("");
     props.toggleJoinProject();

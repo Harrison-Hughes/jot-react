@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import NewProjectButton from "./buttons/NewProjectButton";
 import ProjectCard from "../../../elements/ProjectCard";
 import NewProjectCard from "../../../elements/NewProjectCard";
 import "./ProjectContainer.css";

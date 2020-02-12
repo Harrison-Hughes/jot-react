@@ -14,7 +14,9 @@ const InvitationsList = props => {
       return props.invitations.map((i, index) => {
         return (
           <InvitationElement
-            removeInvitationFromList={ID => props.removeInvitationFromList(ID)}
+            removeInvitationFromList={projCode =>
+              props.removeInvitationFromList(projCode)
+            }
             refetch={props.refetch}
             nickname={nickname}
             invitation={i}

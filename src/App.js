@@ -24,10 +24,8 @@ const App = () => {
       API.validate()
         .then(setUser)
         .then(() => setValidatedUser(true))
-        .catch(errorPromise => {
-          errorPromise.then(data => {
-            setError(data);
-          });
+        .catch(data => {
+          setError(data);
         });
     } else {
       setValidatedUser(true);

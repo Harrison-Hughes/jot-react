@@ -3,32 +3,47 @@ import HomeHeader from "./HomeHeader";
 import HomeBody from "./HomeBody";
 import { ActionCableConsumer } from "react-actioncable-provider";
 import API from "../../adapters/API";
+import { useAlert } from "react-alert";
 
 const Home = props => {
   const [invitations, setInvitations] = useState([]);
   const [error, setError] = useState(null);
 
+  const alert = useAlert();
+
   useEffect(() => fetchInvitations(), []);
 
   useEffect(() => console.log(error), [error]);
 
+  // useEffect(() => popUpErrorMessage("jupiter's moons"), []);
+
   const fetchInvitations = () => {
     API.myInvitations(props.user.user_code)
       .then(setInvitations)
-      .catch(errorPromise => {
-        errorPromise.then(data => {
-          setError(data);
-        });
-      });
+      .catch(
+        setError
+        //   errorPromise => {
+        //   errorPromise.then(data => {
+        //     setError(data);
+        //   });
+        // }
+      );
   };
-  // console.log(invitations);
 
-  const removeInvitationFromList = ID => {
-    console.log(ID);
-    // let newInvitations = invitations.filter(
-    //   i => i.project_code !== invitationID
-    // );
-    // setInvitations(newInvitations);
+  let messageStyles = { color: "white", fontWeight: "bold" };
+
+  const popUpErrorMessage = message => {
+    alert.error(<div style={messageStyles}>{message}</div>);
+  };
+
+  const popUpSuccessMessage = message => {
+    alert.success(<div style={messageStyles}>{message}</div>);
+  };
+
+  const removeInvitationFromList = projCode => {
+    console.log(projCode, invitations);
+    let newInvitations = invitations.filter(i => i.project_code !== projCode);
+    setInvitations(newInvitations);
   };
 
   const handleReceivedInvitation = invitation => {
@@ -48,12 +63,13 @@ const Home = props => {
       )}
       <HomeHeader logOut={() => props.logOut()} user={props.user} />
       <HomeBody
-        removeInvitationFromList={projCode =>
-          removeInvitationFromList(projCode)
-        }
+        popUpErrorMessage={msg => popUpErrorMessage(msg)}
+        popUpSuccessMessage={msg => popUpSuccessMessage(msg)}
+        removeInvitationFromList={ID => removeInvitationFromList(ID)}
         invitations={invitations}
         user={props.user}
-      />
+      />{" "}
+      )}
     </div>
   );
 };

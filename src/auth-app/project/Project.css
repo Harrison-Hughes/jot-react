@@ -26,6 +26,11 @@
   grid-template-rows: 1% 10% auto 10% 1%;
 }
 
+.error-header {
+  color: white;
+  place-self: center;
+}
+
 .project-header {
   width: 100%;
   color: white;

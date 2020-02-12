@@ -6,25 +6,25 @@ const InvitationElement = props => {
   const [project, setProject] = useState(null);
   console.log(props.invitation);
 
-  useEffect(() => getProject(props.invitation.project_code), []);
+  useEffect(() => getProject(props.invitation.project_code), [
+    props.invitation.project_code
+  ]);
 
-  const removeInvitation = () => {
-    props.removeInvitationFromList(project.project_code);
-  };
-
-  const acceptInvitation = ID => {
-    console.log(ID);
-    removeInvitation(ID);
-    // API.acceptInvitation(invitationID, props.nickname)
-    //   .then(removeInvitation(props.invitation.id))
-    //   .then(props.refetch)
-    //   .catch(console.log);
+  const acceptInvitation = () => {
+    API.acceptInvitation(props.invitation.id, props.nickname)
+      .then(removeInvitation(props.invitation.project_code))
+      .then(props.refetch)
+      .catch(console.log);
   };
 
   const declineInvitation = invitationID => {
     API.declineInvitation(invitationID)
-      .then(removeInvitation(invitationID))
+      .then(removeInvitation(props.invitation.project_code))
       .catch(console.log);
+  };
+
+  const removeInvitation = projCode => {
+    props.removeInvitationFromList(projCode);
   };
 
   const getProject = projectCode => {
@@ -41,7 +41,7 @@ const InvitationElement = props => {
           <Button
             disabled={props.nickname.length < 2 || props.nickname.length > 12}
             onClick={() => {
-              acceptInvitation(props.invitation.id);
+              acceptInvitation();
             }}
             positive
             thin
@@ -50,7 +50,7 @@ const InvitationElement = props => {
           </Button>
           <Button
             onClick={() => {
-              declineInvitation(props.invitation.id);
+              declineInvitation();
             }}
             negative
             thin
