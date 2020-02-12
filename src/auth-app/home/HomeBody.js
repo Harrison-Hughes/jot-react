@@ -25,13 +25,12 @@ const HomeBody = ({
   useEffect(() => console.log(error), [error]);
 
   const fetchProjects = () => {
-    API.myProjects(user.user_code)
-      .then(setProjects)
-      .catch(errorPromise => {
-        errorPromise.then(data => {
-          setError(data);
-        });
-      });
+    API.myProjects(user.user_code).then(setProjects);
+    // .catch(errorPromise => {
+    //   errorPromise.then(data => {
+    //     setError(data);
+    //   });
+    // });
   };
 
   // console.log(!!error, !!error && error.status);

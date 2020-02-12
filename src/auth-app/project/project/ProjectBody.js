@@ -7,6 +7,17 @@ const ProjectBody = props => {
 
   useEffect(() => setProject(props.project), [props]);
 
+  useEffect(() => {
+    if (props.cableConnection && project) {
+      const subscription = props.cableConnection.subscriptions.create(
+        { channel: "PadsChannel", project: project.id },
+        {
+          received: resp => handleReceivedPad(resp)
+        }
+      );
+    }
+  });
+
   const handleReceivedPad = pad => {
     let projectClone = Object.assign({}, project);
     let newPads = [...projectClone.pads, pad];
@@ -16,14 +27,14 @@ const ProjectBody = props => {
 
   return (
     <div className="project-body">
-      {project !== null && (
+      {/* {project !== null && (
         <ActionCableConsumer
           channel={{ channel: "PadsChannel", project: project.id }}
           onReceived={resp => handleReceivedPad(resp.pad)}
           onDisconnected={() => console.log("I'm disconnected, Pads channel")}
           onConnected={() => console.log("I'm connected, Pads channel")}
         />
-      )}
+      )} */}
       <DocumentContainer
         nickname={props.nickname}
         project={props.project}
