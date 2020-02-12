@@ -5,6 +5,7 @@ import InvitationElement from "./InvitationElement";
 
 const InvitationsList = props => {
   const [nickname, setNickname] = useState(props.user.default_nickname);
+  // const [error, setError] = useState(null);
 
   const renderInvitations = () => {
     if (props.invitations.length === 0) {
@@ -12,7 +13,13 @@ const InvitationsList = props => {
     } else {
       return props.invitations.map((i, index) => {
         return (
-          <InvitationElement nickname={nickname} invitation={i} key={index} />
+          <InvitationElement
+            removeInvitationFromList={ID => props.removeInvitationFromList(ID)}
+            refetch={props.refetch}
+            nickname={nickname}
+            invitation={i}
+            key={index}
+          />
         );
       });
     }
@@ -29,17 +36,26 @@ const InvitationsList = props => {
       <div className="invitations-list">
         {props.invitations.length !== 0 && (
           <>
-            <label>nickname to join with:</label>
+            <label>nickname to join with:{"  "}</label>
+
             <input
               onChange={handleNicknameChange}
               type="name"
               name="name"
-              placeholder="project code"
+              placeholder="your nickname"
               value={nickname}
             />
+            {nickname.length < 2 && <p className="tiny-warning">too short!</p>}
+            {nickname.length > 12 && (
+              <p className="tiny-warning-white">too long!</p>
+            )}
+            {nickname.length < 12 && nickname.length > 2 && (
+              <p className="tiny-warning"> </p>
+            )}
           </>
         )}
         {renderInvitations()}
+        <button onClick={() => props.quitForm()}>cancel</button>
       </div>
     </FadeInDiv>
   );

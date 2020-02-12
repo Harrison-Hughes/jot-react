@@ -5,18 +5,27 @@ import JoinProjectForm from "./home body/JoinProjectForm";
 import InvitationsList from "./home body/InvitationsList";
 import API from "../../adapters/API";
 
-const HomeBody = ({ user, invitations }) => {
+const HomeBody = ({ user, invitations, removeInvitationFromList }) => {
   const [newProjectForm, setNewProjectForm] = useState(false);
   const [joinProjectForm, setJoinProjectForm] = useState(false);
   const [invitationsList, setInvitationsList] = useState(false);
+  const [error, setError] = useState(null);
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     fetchProjects();
   }, []);
 
+  useEffect(() => console.log(error), [error]);
+
   const fetchProjects = () => {
-    API.myProjects(user.user_code).then(setProjects);
+    API.myProjects(user.user_code)
+      .then(setProjects)
+      .catch(errorPromise => {
+        errorPromise.then(data => {
+          setError(data);
+        });
+      });
   };
 
   return (
@@ -30,9 +39,26 @@ const HomeBody = ({ user, invitations }) => {
           joinProjectForm={joinProjectForm}
           invitationsList={invitationsList}
           numberOfInvitations={invitations.length}
-          toggleNewProject={() => setNewProjectForm(!newProjectForm)}
-          toggleJoinProject={() => setJoinProjectForm(!joinProjectForm)}
-          toggleInvitationsList={() => setInvitationsList(!invitationsList)}
+          engageNewProject={() => {
+            setNewProjectForm(true);
+            setJoinProjectForm(false);
+            setInvitationsList(false);
+          }}
+          engageJoinProject={() => {
+            setNewProjectForm(false);
+            setJoinProjectForm(true);
+            setInvitationsList(false);
+          }}
+          engageInvitationsList={() => {
+            setNewProjectForm(false);
+            setJoinProjectForm(false);
+            setInvitationsList(true);
+          }}
+          quitForm={() => {
+            setNewProjectForm(false);
+            setJoinProjectForm(false);
+            setInvitationsList(false);
+          }}
         />
       </div>
       <div className="home-body-form">
@@ -41,6 +67,11 @@ const HomeBody = ({ user, invitations }) => {
           toggleNewProject={() => setNewProjectForm(!newProjectForm)}
           refetch={() => fetchProjects()}
           newProjectForm={newProjectForm}
+          quitForm={() => {
+            setNewProjectForm(false);
+            setJoinProjectForm(false);
+            setInvitationsList(false);
+          }}
         />
       </div>
       <div className="home-body-form">
@@ -49,6 +80,11 @@ const HomeBody = ({ user, invitations }) => {
           refetch={() => fetchProjects()}
           toggleJoinProject={() => setJoinProjectForm(!joinProjectForm)}
           user={user}
+          quitForm={() => {
+            setNewProjectForm(false);
+            setJoinProjectForm(false);
+            setInvitationsList(false);
+          }}
         />
       </div>
       <div className="home-body-form">
@@ -58,6 +94,12 @@ const HomeBody = ({ user, invitations }) => {
           invitations={invitations}
           refetch={() => fetchProjects()}
           toggleInvitationsList={() => setInvitationsList(!invitationsList)}
+          quitForm={() => {
+            setNewProjectForm(false);
+            setJoinProjectForm(false);
+            setInvitationsList(false);
+          }}
+          removeInvitationFromList={ID => removeInvitationFromList(ID)}
         />
       </div>
     </>

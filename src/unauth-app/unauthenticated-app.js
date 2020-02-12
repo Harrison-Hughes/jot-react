@@ -9,10 +9,10 @@ const UnauthenticatedApp = props => {
   return (
     <div className="unauthenticated-app">
       <Switch>
-        <Route exact path="/WelcomeToJot">
+        <Route exact path="/welcometojot">
           <SignUpForm signIn={user => props.signIn(user)} />
         </Route>
-        <Route exact path="/WelcomeBack">
+        <Route exact path="/welcomeback">
           <SignInForm signIn={user => props.signIn(user)} />
         </Route>
       </Switch>

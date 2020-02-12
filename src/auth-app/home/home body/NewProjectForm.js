@@ -83,7 +83,7 @@ const NewProjectForm = props => {
             />
           </div>
           <div className="form-field">
-            open:
+            open:{" "}
             <input
               type="radio"
               value="open"
@@ -95,7 +95,8 @@ const NewProjectForm = props => {
                 })
               }
             />
-            private:
+            <br />
+            private:{" "}
             <input
               type="radio"
               value="private"
@@ -109,7 +110,7 @@ const NewProjectForm = props => {
             />
           </div>
           <div className="form-field">
-            default access:
+            default access:{" "}
             <select
               value={formData.defaultAccess}
               onChange={e =>
@@ -134,6 +135,7 @@ const NewProjectForm = props => {
             value="Create project"
           />
         </form>
+        <button onClick={() => props.quitForm()}>cancel</button>
       </div>
     </FadeInDiv>
   );

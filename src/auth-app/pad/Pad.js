@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
-import { API_WS_ROOT } from "../../constants/index";
-import { ActionCableProvider } from "react-actioncable-provider";
-
 import API from "../../adapters/API";
 import PadHeader from "./pad/PadHeader";
 import PadBody from "./pad/PadBody";
@@ -11,13 +8,6 @@ import "./Pad.css";
 const Pad = ({ user, location, match }) => {
   const [pad, setPad] = useState([]);
   const { params } = match;
-  const {
-    project_name,
-    project_code,
-    valid,
-    access,
-    nickname
-  } = location.state;
 
   useEffect(() => {
     fetchPad();
@@ -29,13 +19,27 @@ const Pad = ({ user, location, match }) => {
     }
   };
 
+  if (!location.state)
+    return <div>you do not have access to this document</div>;
+
+  const {
+    project_name,
+    project_code,
+    valid,
+    access,
+    nickname
+  } = location.state;
+
   const handleReceivedPoint = resp => {
+    console.log(resp);
+    debugger;
     if (!!resp.point) {
       let padClone = Object.assign({}, pad);
       let newPoints = [...padClone.points, resp.point];
       padClone.points = newPoints;
       setPad(padClone);
     }
+
     if (!!resp.json && !!resp.json.action) {
       if (resp.json.action === "delete") {
         let padClone = Object.assign({}, pad);
@@ -43,6 +47,7 @@ const Pad = ({ user, location, match }) => {
         padClone.points = newPoints;
         setPad(padClone);
       } else if (resp.json.action === "update") {
+        console.log(resp.json.text);
         let padClone = Object.assign({}, pad);
         let newPoints = padClone.points.map(point => {
           if (point.id !== resp.json.id) return point;
@@ -67,16 +72,14 @@ const Pad = ({ user, location, match }) => {
             projectCode={project_code}
             access={access}
           />
-          <ActionCableProvider url={API_WS_ROOT}>
-            <PadBody
-              nickname={nickname}
-              access={access}
-              user={user}
-              pad={pad}
-              fetchPad={() => fetchPad()}
-              handleReceivedPoint={point => handleReceivedPoint(point)}
-            />
-          </ActionCableProvider>
+          <PadBody
+            nickname={nickname}
+            access={access}
+            user={user}
+            pad={pad}
+            fetchPad={() => fetchPad()}
+            handleReceivedPoint={point => handleReceivedPoint(point)}
+          />
         </div>
       ) : (
         "you do not have access to this document"

@@ -23,7 +23,7 @@ const NewPointForm = props => {
       formData.location,
       `${props.nickname}`,
       props.padId
-    ).then(() => props.refetch());
+    );
     setFormData({ text: "", location: "temp", author: "" });
   };
 

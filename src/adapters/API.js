@@ -132,11 +132,11 @@ const editPoint = (pointID, text) =>
     method: "PATCH",
     headers: HEADERS_AUTH,
     body: JSON.stringify({
-      pad: {
+      point: {
         text: text
       }
     })
-  }).then(jsonify);
+  });
 
 const getCollaboration = (projectCode, userCode) =>
   fetch(`${API_ROOT}/getCollaboration/${userCode}/${projectCode}`, {
