@@ -7,7 +7,7 @@ import { useAlert } from "react-alert";
 const Home = props => {
   const [invitations, setInvitations] = useState([]);
   const [error, setError] = useState(null);
-  const homeSubscriptionRef = useRef();
+  const homeSubscriptionRef = useRef(null);
 
   const alert = useAlert();
 
@@ -15,22 +15,41 @@ const Home = props => {
 
   useEffect(() => console.log(error), [error]);
 
+  if (
+    props.cableConnection &&
+    props.user.id &&
+    homeSubscriptionRef.current === null
+  ) {
+    // debugger;
+    console.log("invitations subscribed");
+    homeSubscriptionRef.current = props.cableConnection.subscriptions.create(
+      {
+        channel: "InvitationsChannel",
+        user: props.user.id
+      },
+      {
+        received: resp => handleReceivedInvitation(resp.invitation)
+      }
+    );
+  }
+
   useEffect(() => {
-    if (props.cableConnection && props.user.id) {
-      homeSubscriptionRef.current = props.cableConnection.subscriptions.create(
-        {
-          channel: "InvitationsChannel",
-          user: props.user.id
-        },
-        {
-          received: resp => handleReceivedInvitation(resp.invitation)
-        }
-      );
-    }
+    // if (props.cableConnection && props.user.id) {
+    //   homeSubscriptionRef.current = props.cableConnection.subscriptions.create(
+    //     {
+    //       channel: "InvitationsChannel",
+    //       user: props.user.id
+    //     },
+    //     {
+    //       received: resp => handleReceivedInvitation(resp.invitation)
+    //     }
+    //   );
+    // }
     return () => {
+      console.log("invitations unsubscribed");
       homeSubscriptionRef.current && homeSubscriptionRef.current.unsubscribe();
     };
-  }, [props.user]);
+  }, []);
 
   const fetchInvitations = () => {
     API.myInvitations(props.user.user_code)

@@ -5,10 +5,12 @@ import PadHeader from "./pad/PadHeader";
 import PadBody from "./pad/PadBody";
 import "./Pad.css";
 
+// const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
+
 const Pad = ({ user, location, match, cableConnection }) => {
   const [pad, setPad] = useState(null);
   const { params } = match;
-  const padSubscriptionRef = useRef();
+  const padSubscriptionRef = useRef(null);
 
   useEffect(() => {
     fetchPad();
@@ -20,19 +22,22 @@ const Pad = ({ user, location, match, cableConnection }) => {
     }
   };
 
+  if (cableConnection && pad && padSubscriptionRef.current === null) {
+    console.log("pad subscribed");
+    padSubscriptionRef.current = cableConnection.subscriptions.create(
+      { channel: "PointsChannel", pad: pad.id },
+      {
+        received: resp => handleReceivedPoint(resp)
+      }
+    );
+  }
+
   useEffect(() => {
-    if (cableConnection && pad) {
-      padSubscriptionRef.current = cableConnection.subscriptions.create(
-        { channel: "PointsChannel", pad: pad.id },
-        {
-          received: resp => handleReceivedPoint(resp)
-        }
-      );
-    }
     return () => {
+      console.log("pad unsubscribed");
       padSubscriptionRef.current && padSubscriptionRef.current.unsubscribe();
     };
-  }, [cableConnection, pad]);
+  }, []);
 
   if (!location.state)
     return <div>you do not have access to this document</div>;
@@ -48,10 +53,7 @@ const Pad = ({ user, location, match, cableConnection }) => {
   const handleReceivedPoint = resp => {
     console.log(resp);
     if (!!resp.point) {
-      let padClone = Object.assign({}, pad);
-      let newPoints = [...padClone.points, resp.point];
-      padClone.points = newPoints;
-      setPad(padClone);
+      setPad(pad => ({ ...pad, points: [...pad.points, resp.point] }));
     }
 
     if (!!resp.json && !!resp.json.action) {

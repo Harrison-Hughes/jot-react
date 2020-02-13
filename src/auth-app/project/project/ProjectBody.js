@@ -3,23 +3,38 @@ import DocumentContainer from "./project body/DocumentContainer";
 
 const ProjectBody = props => {
   const [project, setProject] = useState(props.project);
-  const projSubscriptionRef = useRef();
+  const projSubscriptionRef = useRef(null);
 
   useEffect(() => setProject(props.project), [props]);
 
+  if (
+    props.cableConnection &&
+    project &&
+    projSubscriptionRef.current === null
+  ) {
+    console.log("project subscribed");
+    projSubscriptionRef.current = props.cableConnection.subscriptions.create(
+      { channel: "PadsChannel", project: project.id },
+      {
+        received: resp => handleUpdate(resp)
+      }
+    );
+  }
+
   useEffect(() => {
-    if (props.cableConnection && project.id) {
-      projSubscriptionRef.current = props.cableConnection.subscriptions.create(
-        { channel: "PadsChannel", project: project.id },
-        {
-          received: resp => handleUpdate(resp)
-        }
-      );
-    }
+    // if (props.cableConnection && project) {
+    //   projSubscriptionRef.current = props.cableConnection.subscriptions.create(
+    //     { channel: "PadsChannel", project: project.id },
+    //     {
+    //       received: resp => handleUpdate(resp)
+    //     }
+    //   );
+    // }
     return () => {
+      console.log("project unsubscribed");
       projSubscriptionRef.current && projSubscriptionRef.current.unsubscribe();
     };
-  }, [project]);
+  }, []);
 
   const handleUpdate = resp => {
     // console.log(resp);
