@@ -24,6 +24,7 @@ const DocumentContainer = props => {
             nickname={props.nickname}
             refetch={() => props.refetch()}
             editPad={newDetails => props.editPad(newDetails)}
+            someFormPresent={props.someFormPresent}
           />
         );
       });
@@ -61,6 +62,7 @@ const DocumentContainer = props => {
           {renderPads()}
           <NewDocumentOverview
             engageShowNewDocumentForm={() => props.engageShowNewDocumentForm()}
+            someFormPresent={props.someFormPresent}
           />
         </div>
       </div>
