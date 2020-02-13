@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-// import NewPointButton from "./NewPointButton";
+import React from "react";
 
 const ProjectContainer = props => {
   const renderPoints = () => {
@@ -15,6 +14,7 @@ const ProjectContainer = props => {
             onClick={() => props.setSelectedPoint(point)}
             id={point.id}
             key={i}
+            access={props.access}
           >
             {point.text}
           </BulletPoint>
@@ -24,7 +24,13 @@ const ProjectContainer = props => {
   };
 
   return (
-    <div className="pad-container">
+    <div
+      className={
+        props.access === "read only"
+          ? "pad-container-read-only"
+          : "pad-container"
+      }
+    >
       <h2>{props.pad.name}</h2>
       <ul className="points-list">{renderPoints()}</ul>
     </div>
@@ -33,7 +39,8 @@ const ProjectContainer = props => {
 
 const BulletPoint = ({ children, isSelectedPoint, ...props }) => {
   const classNameSelector = () => {
-    if (isSelectedPoint) {
+    if (props.access === "read only") return "bullet-point-untouchable";
+    else if (isSelectedPoint) {
       return "selected-point bullet-point";
     } else return "bullet-point";
   };

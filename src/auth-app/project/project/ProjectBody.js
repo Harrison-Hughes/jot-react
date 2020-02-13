@@ -11,17 +11,22 @@ const ProjectBody = props => {
       const subscription = props.cableConnection.subscriptions.create(
         { channel: "PadsChannel", project: project.id },
         {
-          received: resp => handleReceivedPad(resp)
+          received: resp => handleUpdate(resp)
         }
       );
     }
   });
 
-  const handleReceivedPad = pad => {
-    let projectClone = Object.assign({}, project);
-    let newPads = [...projectClone.pads, pad];
-    projectClone.pads = newPads;
-    setProject(projectClone);
+  const handleUpdate = resp => {
+    // console.log(resp);
+    // console.log(resp.pad);
+    if (!!resp.pad) {
+      let pad = resp.pad;
+      let projectClone = Object.assign({}, project);
+      let newPads = [...projectClone.pads, pad];
+      projectClone.pads = newPads;
+      setProject(projectClone);
+    } else props.refetch();
   };
 
   const editPad = newDetails => {

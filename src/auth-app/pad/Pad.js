@@ -31,7 +31,7 @@ const Pad = ({ user, location, match, cableConnection }) => {
   } = location.state;
 
   const handleReceivedPoint = resp => {
-    // console.log(resp);
+    console.log(resp);
     if (!!resp.point) {
       let padClone = Object.assign({}, pad);
       let newPoints = [...padClone.points, resp.point];
@@ -80,6 +80,9 @@ const Pad = ({ user, location, match, cableConnection }) => {
             fetchPad={() => fetchPad()}
             handleReceivedPoint={point => handleReceivedPoint(point)}
           />
+
+          <div className="left-strip"></div>
+          <div className="right-strip"></div>
         </div>
       ) : (
         "you do not have access to this document"

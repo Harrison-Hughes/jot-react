@@ -38,3 +38,14 @@
   color: white;
   background: green;
 }
+
+.lb {
+  border: solid 1px black;
+  color: black;
+}
+
+.lb:hover {
+  border: solid 1px whitesmoke;
+  color: whitesmoke;
+  background: rgb(59, 59, 59);
+}

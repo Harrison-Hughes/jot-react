@@ -42,6 +42,7 @@ const NewPointForm = props => {
       </div>
       <div className="new-point-form-right">
         <Button
+          lb
           thin
           disabled={formData.text === ""}
           onClick={e => handleSubmit(e)}

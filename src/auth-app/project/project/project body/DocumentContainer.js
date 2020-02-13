@@ -59,11 +59,15 @@ const DocumentContainer = props => {
         }
       >
         <div className="document-display-body-right y-scroll wrapper">
+          {props.access === "admin" && (
+            <NewDocumentOverview
+              engageShowNewDocumentForm={() =>
+                props.engageShowNewDocumentForm()
+              }
+              someFormPresent={props.someFormPresent}
+            />
+          )}
           {renderPads()}
-          <NewDocumentOverview
-            engageShowNewDocumentForm={() => props.engageShowNewDocumentForm()}
-            someFormPresent={props.someFormPresent}
-          />
         </div>
       </div>
     </>

@@ -6,7 +6,9 @@ const NewDocumentOverview = props => {
       <div className="pad-panel-left">
         {props.someFormPresent ? (
           <div className={"document-overview-static element"}>
-            <h3 className="new-document-overview-h3"> - new document -</h3>
+            <div className="boost-bottom-margin">
+              <h3 className="new-document-overview-h3"> - new document -</h3>
+            </div>
           </div>
         ) : (
           <div
