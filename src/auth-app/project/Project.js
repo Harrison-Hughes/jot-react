@@ -161,6 +161,7 @@ const Project = ({ match, user, cableConnection }) => {
           project={project}
           access={collaboration.access}
           showEditForm={showEditProject}
+          refetch={() => fetchProject()}
           moreThanOneAdmin={() => moreThanOneAdmin()}
           quitForm={() => {
             setShowCollaborators(false);

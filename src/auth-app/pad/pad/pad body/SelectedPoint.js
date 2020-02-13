@@ -15,6 +15,8 @@ const SelectedPoint = ({
     API.deletePoint(selectedPoint.id);
   };
 
+  console.log(userCode, selectedPoint);
+
   const updatePoint = newText => {
     API.editPoint(selectedPoint.id, newText);
     setEditMode(false);
@@ -56,7 +58,7 @@ const OwnerOrAdmin = ({
     return (
       <div className="selected-point-container">
         <div className="selected-point-left">
-          <p>{selectedPoint.text}</p>
+          <PointText text={selectedPoint.text} />
         </div>
         <div className="selected-point-right">
           <div className="selected-point-right-upper">
@@ -65,9 +67,6 @@ const OwnerOrAdmin = ({
           <div className="selected-point-right-lower">
             <Button positive onClick={() => enterEditMode()} thin>
               edit
-            </Button>
-            <Button positive thin>
-              move
             </Button>
             <Button onClick={() => deletePoint()} negative thin>
               delete
@@ -80,15 +79,17 @@ const OwnerOrAdmin = ({
     return (
       <div className="selected-point-container">
         <div className="selected-point-left">
-          <textarea
-            className="new-point-textarea-input"
-            onChange={handleTextChange}
-            rows="3"
-            cols="30"
-            name="text"
-            placeholder="point text"
-            value={pointText}
-          />
+          <div className="selected-point-left-centred">
+            <textarea
+              className="new-point-textarea-input"
+              onChange={handleTextChange}
+              rows="5"
+              cols="65"
+              name="text"
+              placeholder="point text"
+              value={pointText}
+            />
+          </div>
         </div>
         <div className="selected-point-right">
           <div className="selected-point-right-upper">
@@ -112,11 +113,19 @@ const CasualViewer = ({ selectedPoint }) => {
   return (
     <div className="selected-point-container">
       <div className="selected-point-left">
-        <p>{selectedPoint.text}</p>
+        <PointText text={selectedPoint.text} />
       </div>
       <div className="selected-point-right">
-        <p className="center">author: {selectedPoint.author}</p>
+        <p className="centred">author: {selectedPoint.author}</p>
       </div>
+    </div>
+  );
+};
+
+const PointText = ({ text }) => {
+  return (
+    <div className="point-text">
+      <p className="spec-p">{text}</p>
     </div>
   );
 };

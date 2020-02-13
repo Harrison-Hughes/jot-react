@@ -133,14 +133,22 @@
   width: 100%;
   /* place-self: center; */
   grid-area: 1/1/2/2;
+  overflow: scroll;
 }
+
+/* .selected-point-left-centred {
+  margin: 0 auto;
+} */
 
 .selected-point-right {
   width: 100%;
-  /* place-self: center; */
+  height: 100%;
+  place-self: center;
   grid-area: 1/2/2/3;
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: auto auto;
+  border-width: 1px;
+  border-style: solid;
 }
 
 .center {
@@ -149,7 +157,7 @@
 
 .selected-point-right-lower {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 .selected-point {
@@ -171,7 +179,7 @@
   font-family: sans, Arial, Helvetica Neue, sans-serif;
   place-self: center;
   resize: none;
-  place-self: center;
+  margin: 0 auto;
 }
 
 /* .new-point-textarea-input:focus {
@@ -188,18 +196,28 @@
 .bullet-point-untouchable {
   padding: 5px;
   margin: 3px;
-  border-radius: 3px;
-  background-color: cornsilk;
-  border-width: 1px;
-  border-style: solid;
 }
 
 .selected-point {
+  /* border-radius: 3px; */
   border-width: 1px;
-  border-style: solid;
+  background-color: rgb(252, 248, 231);
+  border-style: none none solid solid;
   /* background-color: rgb(219, 208, 208); */
 }
 
 .bullet-point:hover {
   cursor: pointer;
+}
+
+.point-text {
+  margin: 0 auto;
+  place-self: center;
+  height: 5.5vh;
+}
+
+p {
+  text-align: center;
+  padding-left: 5px;
+  padding-right: 5px;
 }

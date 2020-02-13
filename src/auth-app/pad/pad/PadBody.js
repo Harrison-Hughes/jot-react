@@ -35,7 +35,6 @@ const PadBody = props => {
             clearSelectedPoint={() => setSelectedPoint(null)}
             selectedPoint={selectedPoint}
           />
-          }
         </div>
       )}
     </div>

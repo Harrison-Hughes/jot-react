@@ -58,23 +58,20 @@ const Pad = ({ user, location, match, cableConnection }) => {
 
     if (!!resp.json && !!resp.json.action) {
       if (resp.json.action === "delete") {
-        let padClone = Object.assign({}, pad);
-        let newPoints = padClone.points.filter(p => p.id !== resp.json.id);
-        padClone.points = newPoints;
-        setPad(padClone);
+        setPad(pad => ({
+          ...pad,
+          points: pad.points.filter(p => p.id !== resp.json.id)
+        }));
       } else if (resp.json.action === "update") {
         console.log(resp.json.text);
-        let padClone = Object.assign({}, pad);
-        let newPoints = padClone.points.map(point => {
-          if (point.id !== resp.json.id) return point;
-          else {
-            let pointClone = Object.assign({}, point);
-            pointClone.text = resp.json.text;
-            return pointClone;
-          }
-        });
-        padClone.points = newPoints;
-        setPad(padClone);
+        setPad(pad => ({
+          ...pad,
+          points: pad.points.map(point =>
+            point.id !== resp.json.id
+              ? point
+              : { ...point, text: resp.json.text }
+          )
+        }));
       }
     }
   };

@@ -3,7 +3,11 @@ import React from "react";
 const ProjectContainer = props => {
   const renderPoints = () => {
     if (!!props.pad.points) {
-      return props.pad.points.map((point, i) => {
+      let pointsClone = [...props.pad.points];
+      pointsClone.sort(function(a, b) {
+        return a.location - b.location;
+      });
+      return pointsClone.map((point, i) => {
         return (
           <BulletPoint
             isSelectedPoint={
@@ -14,6 +18,7 @@ const ProjectContainer = props => {
             onClick={() => props.setSelectedPoint(point)}
             id={point.id}
             key={i}
+            location={point.location}
             access={props.access}
           >
             {point.text}

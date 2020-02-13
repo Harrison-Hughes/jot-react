@@ -41,7 +41,7 @@ const ProjectContainer = props => {
     <div className="project-container">
       <div className="project-container-header">
         <div className="project-container-header-left">
-          <h2>YOUR PROJECTS</h2>
+          <h2 className={{ "font-size": "28px" }}>YOUR PROJECTS</h2>
         </div>
         <div className="project-container-header-middle"></div>
         <div className="project-container-header-right">

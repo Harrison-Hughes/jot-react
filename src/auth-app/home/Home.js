@@ -74,6 +74,10 @@ const Home = props => {
     alert.success(<div style={messageStyles}>{message}</div>);
   };
 
+  const popUpAlert = message => {
+    alert.info(<div style={messageStyles}>{message}</div>);
+  };
+
   const removeInvitationFromList = projCode => {
     console.log(projCode, invitations);
     let newInvitations = invitations.filter(i => i.project_code !== projCode);
@@ -83,6 +87,7 @@ const Home = props => {
   const handleReceivedInvitation = invitation => {
     console.log(invitation);
     setInvitations([...invitations, invitation]);
+    popUpAlert("you have 1 new invitation");
   };
 
   return (

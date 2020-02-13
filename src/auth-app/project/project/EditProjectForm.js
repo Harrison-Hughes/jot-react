@@ -4,6 +4,7 @@ import FadeInDiv from "../../../elements/FadeInDiv";
 import API from "../../../adapters/API";
 import "./EditProjectForm.css";
 import Button from "../../../elements/Button";
+import { useAlert } from "react-alert";
 
 const EditProjectForm = ({
   user,
@@ -11,19 +12,31 @@ const EditProjectForm = ({
   access,
   showEditForm,
   moreThanOneAdmin,
-  quitForm
+  quitForm,
+  refetch
 }) => {
   const hist = useHistory();
   const [moreAdminsNeededMsg, setMoreAdminsNeededMsg] = useState(false);
+
+  const alert = useAlert();
 
   const leaveProject = () => {
     API.leaveProject(user.id, project.id);
     hist.push(`/homescreen`);
   };
 
+  let messageStyles = { color: "white", fontWeight: "bold" };
+
+  const popUpErrorMessage = message => {
+    alert.error(<div style={messageStyles}>{message}</div>);
+  };
+
   const tryToLeaveProject = () => {
     if (moreThanOneAdmin()) leaveProject();
-    else setMoreAdminsNeededMsg(true);
+    else
+      popUpErrorMessage(
+        "you cannot leave, as you are the only admin - promote another collaborator to admin, then try again"
+      );
   };
 
   return (
@@ -35,6 +48,9 @@ const EditProjectForm = ({
           <div>
             {access === "admin" && (
               <EditProjectFormAdmin
+                quitForm={quitForm}
+                refetch={refetch}
+                popUpErrorMessage={msg => popUpErrorMessage(msg)}
                 tryToLeaveProject={() => tryToLeaveProject()}
                 moreAdminsNeededMsg={moreAdminsNeededMsg}
                 project={project}
@@ -61,9 +77,11 @@ const EditProjectForm = ({
 };
 
 const EditProjectFormAdmin = ({
-  moreAdminsNeededMsg,
+  popUpErrorMessage,
   project,
-  tryToLeaveProject
+  tryToLeaveProject,
+  quitForm,
+  refetch
 }) => {
   const [formData, setFormData] = useState({
     name: project.name,
@@ -102,7 +120,15 @@ const EditProjectFormAdmin = ({
       formData.description,
       formData.defaultAccess,
       formData.open
-    );
+    )
+      .then(() => {
+        refetch();
+        quitForm();
+      })
+      .catch(err => {
+        console.log(err);
+        // popUpErrorMessage("could not update");
+      });
   };
 
   return (
@@ -183,18 +209,18 @@ const EditProjectFormAdmin = ({
         </form>
       </div>
       <div className="delete-project">
-        <Button negative thin onClick={() => console.log("delete project")}>
+        {/* <Button negative thin onClick={() => console.log("delete project")}>
           delete project
-        </Button>
+        </Button> */}
         <Button negative thin onClick={() => tryToLeaveProject()}>
           leave project
         </Button>
-        {moreAdminsNeededMsg && (
+        {/* {moreAdminsNeededMsg && (
           <p>
             you cannot leave, as you are the only admin - promote another
             collaborator to admin, then try again
           </p>
-        )}
+        )} */}
       </div>
     </div>
   );

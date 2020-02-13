@@ -1,6 +1,6 @@
 .admin-project-options {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
 }
 
 .edit-project-form {
