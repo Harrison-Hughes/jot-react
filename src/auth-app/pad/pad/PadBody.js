@@ -6,19 +6,7 @@ import SelectedPoint from "./pad body/SelectedPoint";
 const PadBody = props => {
   const [selectedPoint, setSelectedPoint] = useState(null);
 
-  useEffect(() => setSelectedPoint(selectedPoint), [selectedPoint]);
-
-  useEffect(() => {
-    if (props.cableConnection) {
-      const subscription = props.cableConnection.subscriptions.create(
-        { channel: "PointsChannel", pad: props.pad.id },
-        {
-          received: resp => props.handleReceivedPoint(resp)
-        }
-      );
-    }
-  });
-
+  if (props.pad === null) return <h1>No pad yet...</h1>;
   return (
     <div className="pad-body">
       {props.pad !== [] && (
@@ -47,6 +35,7 @@ const PadBody = props => {
             clearSelectedPoint={() => setSelectedPoint(null)}
             selectedPoint={selectedPoint}
           />
+          }
         </div>
       )}
     </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import HomeHeader from "./HomeHeader";
 import HomeBody from "./HomeBody";
 import API from "../../adapters/API";
@@ -7,6 +7,7 @@ import { useAlert } from "react-alert";
 const Home = props => {
   const [invitations, setInvitations] = useState([]);
   const [error, setError] = useState(null);
+  const homeSubscriptionRef = useRef();
 
   const alert = useAlert();
 
@@ -15,8 +16,8 @@ const Home = props => {
   useEffect(() => console.log(error), [error]);
 
   useEffect(() => {
-    if (props.cableConnection) {
-      const subscription = props.cableConnection.subscriptions.create(
+    if (props.cableConnection && props.user.id) {
+      homeSubscriptionRef.current = props.cableConnection.subscriptions.create(
         {
           channel: "InvitationsChannel",
           user: props.user.id
@@ -26,7 +27,10 @@ const Home = props => {
         }
       );
     }
-  });
+    return () => {
+      homeSubscriptionRef.current && homeSubscriptionRef.current.unsubscribe();
+    };
+  }, [props.user]);
 
   const fetchInvitations = () => {
     API.myInvitations(props.user.user_code)
