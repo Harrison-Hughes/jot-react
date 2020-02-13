@@ -20,13 +20,7 @@ const JoinProjectForm = props => {
     API.joinProjectIfOpen(projectCode, props.user.user_code, nickname)
       .then(resp => resp.json())
       .then(resp => {
-        if (
-          !!resp.error
-          // === "collaboration already exists" ||
-          // "project is closed" ||
-          // "project not found"
-        )
-          props.popUpErrorMessage(resp.error);
+        if (!!resp.error) props.popUpErrorMessage(resp.error);
         else {
           props.refetch();
           props.popUpSuccessMessage("project successfully joined");

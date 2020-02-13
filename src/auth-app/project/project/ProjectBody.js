@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import DocumentContainer from "./project body/DocumentContainer";
-import { ActionCable, ActionCableConsumer } from "react-actioncable-provider";
 
 const ProjectBody = props => {
   const [project, setProject] = useState(props.project);
@@ -25,17 +24,21 @@ const ProjectBody = props => {
     setProject(projectClone);
   };
 
+  const editPad = newDetails => {
+    let projectClone = Object.assign({}, project);
+    let newPads = project.pads.map(pad => {
+      if (pad.id === newDetails.id) return newDetails;
+      else return pad;
+    });
+    projectClone.pads = newPads;
+    setProject(projectClone);
+  };
+
   return (
     <div className="project-body">
-      {/* {project !== null && (
-        <ActionCableConsumer
-          channel={{ channel: "PadsChannel", project: project.id }}
-          onReceived={resp => handleReceivedPad(resp.pad)}
-          onDisconnected={() => console.log("I'm disconnected, Pads channel")}
-          onConnected={() => console.log("I'm connected, Pads channel")}
-        />
-      )} */}
       <DocumentContainer
+        engageShowNewDocumentForm={() => props.engageShowNewDocumentForm()}
+        refetch={() => props.refetch()}
         nickname={props.nickname}
         project={props.project}
         access={props.access}
@@ -43,6 +46,7 @@ const ProjectBody = props => {
         showNewDocumentForm={props.showNewDocumentForm}
         toggleNewDoc={() => props.toggleNewDoc()}
         pads={!!project && project.pads}
+        editPad={newDetails => editPad(newDetails)}
       />
     </div>
   );

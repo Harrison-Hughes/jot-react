@@ -71,6 +71,7 @@ const CollaboratorList = props => {
               />
             </div>
           )}
+          <button onClick={() => props.quitForm()}>cancel</button>
         </div>
       </FadeInDiv>
     </div>

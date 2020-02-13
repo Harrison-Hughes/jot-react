@@ -3,17 +3,28 @@ import { useHistory } from "react-router-dom";
 import API from "../../../../adapters/API";
 import Button from "../../../../elements/Button";
 
-const SelectedDocumentPanel = ({ document, access, project, nickname }) => {
+const SelectedDocumentPanel = ({
+  document,
+  access,
+  project,
+  nickname,
+  refetch,
+  updatePad
+}) => {
   const hist = useHistory();
   const [editMode, setEditMode] = useState(false);
   const [deleteMode, setDeleteMode] = useState(false);
 
   const deletePad = () => {
-    API.deletePad(document.pad_code);
+    API.deletePad(document.pad_code)
+      .then(() => refetch())
+      .catch(console.log);
   };
 
   const editPad = (name, description) => {
-    API.editPad(document.pad_code, name, description);
+    API.editPad(document.pad_code, name, description)
+      .then(resp => updatePad(resp))
+      .catch(() => refetch());
   };
 
   const openDocument = () => {
@@ -151,7 +162,6 @@ const EditOption = ({
   };
 
   const cancelUpdate = () => {
-    console.log("clicked");
     leaveEditMode();
     setFormData({
       name: document.name,

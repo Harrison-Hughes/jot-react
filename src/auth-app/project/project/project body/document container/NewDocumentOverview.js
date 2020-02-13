@@ -5,7 +5,7 @@ const NewDocumentOverview = props => {
     <div className="pad-panel">
       <div className="pad-panel-left">
         <div
-          onClick={() => props.toggleNewDoc()}
+          onClick={() => props.engageShowNewDocumentForm()}
           className={"document-overview element"}
         >
           <h3 className="new-document-overview-h3"> - new document -</h3>

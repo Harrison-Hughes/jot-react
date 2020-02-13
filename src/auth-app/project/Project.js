@@ -7,9 +7,11 @@ import API from "../../adapters/API";
 import NewDocumentForm from "./project/NewDocumentForm";
 import "./Project.css";
 import EditProjectForm from "./project/EditProjectForm";
+import { useAlert } from "react-alert";
 
 const Project = ({ match, user, cableConnection }) => {
   const { params } = match;
+  const alert = useAlert();
 
   const [project, setProject] = useState(null);
   const [errorPage, setErrorPage] = useState(false);
@@ -66,8 +68,28 @@ const Project = ({ match, user, cableConnection }) => {
   };
 
   const inviteUser = userCode => {
-    console.log(userCode, project.project_code);
-    !!project && API.sendInvitation(userCode, project.project_code);
+    // console.log(userCode, project.project_code);
+    !!project &&
+      API.sendInvitation(userCode, project.project_code)
+        .then(resp => resp.json())
+        .then(resp => {
+          if (!!resp.error) popUpErrorMessage(resp.error);
+          else {
+            popUpSuccessMessage("invite sent");
+          }
+        });
+    // .then(console.log)
+    // .catch(console.log);
+  };
+
+  let messageStyles = { color: "white", fontWeight: "bold" };
+
+  const popUpErrorMessage = message => {
+    alert.error(<div style={messageStyles}>{message}</div>);
+  };
+
+  const popUpSuccessMessage = message => {
+    alert.success(<div style={messageStyles}>{message}</div>);
   };
 
   if (!!errorPage)
@@ -81,25 +103,21 @@ const Project = ({ match, user, cableConnection }) => {
     return (
       <div className="project-page">
         <ProjectHeader
-          toggleShowCollaborators={() => {
-            if (!showCollaborators) {
-              setShowNewDocumentForm(false);
-              setShowEditProject(false);
-            }
-            setShowCollaborators(!showCollaborators);
-          }}
           showCollaborators={showCollaborators}
           project={project}
           nickname={collaboration.nickname}
           access={collaboration.access}
           projectCode={params.projectCode}
           showEditProject={showEditProject}
-          toggleShowEditProject={() => {
-            if (!showEditProject) {
-              setShowNewDocumentForm(false);
-              setShowCollaborators(false);
-            }
-            setShowEditProject(!showEditProject);
+          engageShowCollaborators={() => {
+            setShowCollaborators(true);
+            setShowNewDocumentForm(false);
+            setShowEditProject(false);
+          }}
+          engageShowEditProject={() => {
+            setShowCollaborators(false);
+            setShowNewDocumentForm(false);
+            setShowEditProject(true);
           }}
         />
         <ProjectBody
@@ -108,19 +126,18 @@ const Project = ({ match, user, cableConnection }) => {
           access={collaboration.access}
           project={project}
           nickname={collaboration.nickname}
-          toggleNewDoc={() => {
-            if (!showNewDocumentForm) {
-              setShowCollaborators(false);
-              setShowEditProject(false);
-            }
-            setShowNewDocumentForm(!showNewDocumentForm);
-          }}
           showNewDocumentForm={showNewDocumentForm}
           someFormPresent={
             showCollaborators || showNewDocumentForm || showEditProject
               ? true
               : false
           }
+          refetch={() => fetchProject()}
+          engageShowNewDocumentForm={() => {
+            setShowCollaborators(false);
+            setShowNewDocumentForm(true);
+            setShowEditProject(false);
+          }}
         />
         <CollaboratorList
           user={user}
@@ -133,6 +150,11 @@ const Project = ({ match, user, cableConnection }) => {
           projectCode={params.projectCode}
           project={project}
           inviteUser={userCode => inviteUser(userCode)}
+          quitForm={() => {
+            setShowCollaborators(false);
+            setShowNewDocumentForm(false);
+            setShowEditProject(false);
+          }}
         />
         <EditProjectForm
           user={user}
@@ -140,6 +162,11 @@ const Project = ({ match, user, cableConnection }) => {
           access={collaboration.access}
           showEditForm={showEditProject}
           moreThanOneAdmin={() => moreThanOneAdmin()}
+          quitForm={() => {
+            setShowCollaborators(false);
+            setShowNewDocumentForm(false);
+            setShowEditProject(false);
+          }}
         />
         {!!project && (
           <NewDocumentForm
@@ -147,6 +174,11 @@ const Project = ({ match, user, cableConnection }) => {
             refetch={() => fetchProject()}
             showNewDocumentForm={showNewDocumentForm}
             toggleNewDoc={() => setShowNewDocumentForm(!showNewDocumentForm)}
+            quitForm={() => {
+              setShowCollaborators(false);
+              setShowNewDocumentForm(false);
+              setShowEditProject(false);
+            }}
           />
         )}
       </div>

@@ -22,6 +22,8 @@ const DocumentContainer = props => {
             access={props.access}
             document={selectedDocument}
             nickname={props.nickname}
+            refetch={() => props.refetch()}
+            editPad={newDetails => props.editPad(newDetails)}
           />
         );
       });
@@ -57,7 +59,9 @@ const DocumentContainer = props => {
       >
         <div className="document-display-body-right y-scroll wrapper">
           {renderPads()}
-          <NewDocumentOverview toggleNewDoc={() => props.toggleNewDoc()} />
+          <NewDocumentOverview
+            engageShowNewDocumentForm={() => props.engageShowNewDocumentForm()}
+          />
         </div>
       </div>
     </>

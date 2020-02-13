@@ -25,13 +25,13 @@ const ProjectHeader = props => {
       </div>
       <div className="h4">{props.project && <h1>{props.project.name}</h1>}</div>
       <div className="h5">
-        <Button thin onClick={props.toggleShowCollaborators}>
-          {props.showCollaborators ? "cancel" : "collaborators"}
+        <Button thin onClick={props.engageShowCollaborators}>
+          collaborators
         </Button>
       </div>
       <div className="h6">
-        <Button thin onClick={props.toggleShowEditProject}>
-          {props.showEditProject ? "cancel" : "options"}
+        <Button thin onClick={props.engageShowEditProject}>
+          options
         </Button>
       </div>
       <div className="h7">

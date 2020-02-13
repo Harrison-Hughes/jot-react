@@ -84,6 +84,7 @@ const NewDocumentForm = props => {
               value="Create document"
             />
           </form>
+          <button onClick={() => props.quitForm()}>cancel</button>
         </div>
       </FadeInDiv>
     </div>

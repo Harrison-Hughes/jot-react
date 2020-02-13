@@ -10,7 +10,8 @@ const EditProjectForm = ({
   project,
   access,
   showEditForm,
-  moreThanOneAdmin
+  moreThanOneAdmin,
+  quitForm
 }) => {
   const hist = useHistory();
   const [moreAdminsNeededMsg, setMoreAdminsNeededMsg] = useState(false);
@@ -51,6 +52,7 @@ const EditProjectForm = ({
                 project={project}
               />
             )}
+            <button onClick={() => quitForm()}>cancel</button>
           </div>
         )}
       </FadeInDiv>

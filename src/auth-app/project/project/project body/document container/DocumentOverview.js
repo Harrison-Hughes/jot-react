@@ -23,6 +23,8 @@ const DocumentOverview = props => {
             access={props.access}
             document={props.document}
             nickname={props.nickname}
+            refetch={() => props.refetch()}
+            updatePad={newDetails => props.editPad(newDetails)}
           />
         </Collapse>
       </div>
