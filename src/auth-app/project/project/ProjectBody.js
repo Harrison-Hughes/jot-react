@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import DocumentContainer from "./project body/DocumentContainer";
 
 const ProjectBody = props => {
   const [project, setProject] = useState(props.project);
+  const projSubscriptionRef = useRef();
 
   useEffect(() => setProject(props.project), [props]);
 
   useEffect(() => {
-    if (props.cableConnection && project) {
-      const subscription = props.cableConnection.subscriptions.create(
+    if (props.cableConnection && project.id) {
+      projSubscriptionRef.current = props.cableConnection.subscriptions.create(
         { channel: "PadsChannel", project: project.id },
         {
           received: resp => handleReceivedPad(resp)
         }
       );
     }
-  });
+    return () => {
+      projSubscriptionRef.current && projSubscriptionRef.current.unsubscribe();
+    };
+  }, [project]);
 
   const handleReceivedPad = pad => {
     let projectClone = Object.assign({}, project);

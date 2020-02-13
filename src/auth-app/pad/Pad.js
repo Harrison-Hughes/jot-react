@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { withRouter } from "react-router-dom";
 import API from "../../adapters/API";
 import PadHeader from "./pad/PadHeader";
@@ -6,8 +6,9 @@ import PadBody from "./pad/PadBody";
 import "./Pad.css";
 
 const Pad = ({ user, location, match, cableConnection }) => {
-  const [pad, setPad] = useState([]);
+  const [pad, setPad] = useState(null);
   const { params } = match;
+  const padSubscriptionRef = useRef();
 
   useEffect(() => {
     fetchPad();
@@ -18,6 +19,20 @@ const Pad = ({ user, location, match, cableConnection }) => {
       API.getPad(params.padCode).then(setPad);
     }
   };
+
+  useEffect(() => {
+    if (cableConnection && pad) {
+      padSubscriptionRef.current = cableConnection.subscriptions.create(
+        { channel: "PointsChannel", pad: pad.id },
+        {
+          received: resp => handleReceivedPoint(resp)
+        }
+      );
+    }
+    return () => {
+      padSubscriptionRef.current && padSubscriptionRef.current.unsubscribe();
+    };
+  }, [cableConnection, pad]);
 
   if (!location.state)
     return <div>you do not have access to this document</div>;
@@ -77,7 +92,7 @@ const Pad = ({ user, location, match, cableConnection }) => {
             access={access}
             user={user}
             pad={pad}
-            fetchPad={() => fetchPad()}
+            // fetchPad={() => fetchPad()}
             handleReceivedPoint={point => handleReceivedPoint(point)}
           />
         </div>
