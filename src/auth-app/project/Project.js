@@ -71,7 +71,12 @@ const Project = ({ match, user, cableConnection }) => {
   };
 
   if (!!errorPage)
-    return <div>please refresh the page - sorry for the inconvenience</div>;
+    return (
+      <>
+        <div></div>
+        <h1 className="error-header">server error: please refresh the page</h1>
+      </>
+    );
   else
     return (
       <div className="project-page">

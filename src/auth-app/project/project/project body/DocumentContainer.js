@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DocumentOverview from "./document container/DocumentOverview";
-import NewDocumentButton from "./document container/NewDocumentButton";
-import SelectedDocumentPanel from "./SelectedDocumentPanel";
+import NewDocumentOverview from "./document container/NewDocumentOverview";
 
 const DocumentContainer = props => {
   const [selectedDocument, setSelectedDocument] = useState(null);
@@ -12,9 +11,17 @@ const DocumentContainer = props => {
         return (
           <DocumentOverview
             isSelectedDocument={isSelectedDocument(pad, selectedDocument)}
-            setDocument={pad => setSelectedDocument(pad)}
+            setDocument={pad => {
+              pad === selectedDocument
+                ? setSelectedDocument(null)
+                : setSelectedDocument(pad);
+            }}
             key={i}
             pad={pad}
+            project={props.project}
+            access={props.access}
+            document={selectedDocument}
+            nickname={props.nickname}
           />
         );
       });
@@ -35,16 +42,11 @@ const DocumentContainer = props => {
   return (
     <>
       <div className="document-display-header">
-        <div className="document-display-header-left"></div>
-        <div className="document-display-header-centre">
-          <h3 className="sub">documents</h3>
+        <div className="document-display-header-left">
+          <h3 className="sub">PROJECT DOCUMENTS</h3>
         </div>
-        <div className="document-display-header-right">
-          <NewDocumentButton
-            on={props.showNewDocumentForm}
-            toggleNewDoc={() => props.toggleNewDoc()}
-          />
-        </div>
+        <div className="document-display-header-centre"></div>
+        <div className="document-display-header-right"></div>
       </div>
       <div
         className={
@@ -53,18 +55,9 @@ const DocumentContainer = props => {
             : "document-display-body"
         }
       >
-        <div className="document-display-body-left">
-          <SelectedDocumentPanel
-            project={props.project}
-            access={props.access}
-            document={selectedDocument}
-            nickname={props.nickname}
-          />
-        </div>
-        <div className="document-display-body-right">
-          <div className="scroll-container y-scroll y-proximity">
-            <div className="wrapper">{renderPads()}</div>
-          </div>
+        <div className="document-display-body-right y-scroll wrapper">
+          {renderPads()}
+          <NewDocumentOverview toggleNewDoc={() => props.toggleNewDoc()} />
         </div>
       </div>
     </>

@@ -1,10 +1,9 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
-// import API from "../../../../../adapters/API";
+import Collapse from "@kunukn/react-collapse";
+import "../../Accordion.css";
+import SelectedDocumentPanel from "../SelectedDocumentPanel";
 
 const DocumentOverview = props => {
-  // const hist = useHistory();
-
   return (
     <div className="pad-panel">
       <div className="pad-panel-left">
@@ -17,15 +16,18 @@ const DocumentOverview = props => {
           }
         >
           <h3 className="document-overview-h3">{props.pad.name}</h3>
-          {/* <p className="document-overview-p">{props.pad.description}</p> */}
         </div>
+        <Collapse isOpen={props.isSelectedDocument}>
+          <SelectedDocumentPanel
+            project={props.project}
+            access={props.access}
+            document={props.document}
+            nickname={props.nickname}
+          />
+        </Collapse>
       </div>
     </div>
   );
 };
 
 export default DocumentOverview;
-
-// onClick={() => {
-//   hist.push(`/pad/${props.pad.pad_code}`, { valid: true });
-// }}

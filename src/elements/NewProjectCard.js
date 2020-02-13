@@ -16,7 +16,7 @@ const NewProjectCard = props => {
           }
         >
           <div className="project-card-front-centre">
-            <h1 className="super-big">+</h1>
+            <h1 className=" cente super-big">+</h1>
           </div>
         </div>
       </div>

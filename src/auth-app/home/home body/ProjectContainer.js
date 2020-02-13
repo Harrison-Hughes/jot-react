@@ -69,6 +69,7 @@ const ProjectContainer = props => {
             : "project-container-body y-proximity"
         }
       >
+        {renderProjectCards()}
         <NewProjectCard
           deactivated={
             props.newProjectForm ||
@@ -79,7 +80,6 @@ const ProjectContainer = props => {
           active={props.newProjectForm}
           engageNewProject={props.engageNewProject}
         />
-        {renderProjectCards()}
       </div>
     </div>
   );

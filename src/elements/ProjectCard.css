@@ -1,7 +1,7 @@
 .project-card {
   background-color: transparent;
   width: 220px;
-  height: 150px;
+  height: 220px;
   perspective: 1000px;
   /* border-radius: 10px; */
   padding: 10px;
@@ -13,7 +13,7 @@
 .project-card-static {
   background-color: transparent;
   width: 220px;
-  height: 150px;
+  height: 220px;
   perspective: 1000px;
   /* border-radius: 10px; */
   padding: 10px;
@@ -49,7 +49,7 @@
 
 .project-card-back {
   background-color: slategray;
-  color: white;
+  color: whitesmoke;
   transform: rotateY(180deg);
 }
 
@@ -90,7 +90,7 @@ button:hover {
 }
 
 .super-big {
-  font-size: 65px;
+  font-size: 85px;
 }
 
 .cente {
@@ -100,4 +100,13 @@ button:hover {
 .new-project:hover {
   background-color: lightgray;
   cursor: pointer;
+}
+
+.project-card-back-title {
+  margin-top: 16px;
+  margin-bottom: 14px;
+}
+
+.no-upper-margin {
+  margin-top: 5px;
 }

@@ -4,7 +4,7 @@
   width: 100%;
   display: grid;
   grid-template-columns: 3% 1fr 3%;
-  grid-template-rows: 1% 10% auto 10% 1%;
+  grid-template-rows: 1% 13% auto 10% 1%;
   /* font-family: "Roboto", sans-serif; */
   font-family: "Montserrat", sans-serif;
 }
@@ -48,11 +48,12 @@
 
 .project-container-body {
   box-sizing: border-box;
-  height: 50vh;
+  height: 60vh;
   width: 100%;
+  /* top: 15%; */
 
   font-family: "Roboto", sans-serif;
-  place-self: center;
+  /* place-self: center; */
   grid-area: 3 / 2 / 4 / 3;
 
   display: grid;

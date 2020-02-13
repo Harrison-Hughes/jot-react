@@ -32,13 +32,12 @@ const SelectedDocumentPanel = ({ document, access, project, nickname }) => {
     if (!!document.pad_code) return "pad";
     else return "unknown";
   };
-  return (
-    <div className="selected-document-panel">
-      {!document ? (
-        <div className="no-selected-document">
-          <h1>no document selected</h1>
-        </div>
-      ) : (
+
+  if (!document) return <div className="no-height-div"></div>;
+  else
+    return (
+      // <div className="document-display-body-left">
+      <div className="selected-document-panel">
         <div className="selected-document">
           {access === "admin" ? (
             <EditOption
@@ -50,15 +49,15 @@ const SelectedDocumentPanel = ({ document, access, project, nickname }) => {
             />
           ) : (
             <div>
-              <div className="selected-document-header">
-                <h1>{document.name}</h1>
-              </div>
+              {/* <div className="selected-document-header">
+                  <h1>{document.name}</h1>
+                </div> */}
               <div className="selected-document-description">
                 <p>{document.description}</p>
               </div>
-              <div className="selected-document-type">
-                <h4>Document type: {docType()}</h4>
-              </div>
+              {/* <div className="selected-document-type">
+                  <h4>Document type: {docType()}</h4>
+                </div> */}
             </div>
           )}
           <div className="selected-document-open-button">
@@ -75,9 +74,9 @@ const SelectedDocumentPanel = ({ document, access, project, nickname }) => {
             />
           )}
         </div>
-      )}
-    </div>
-  );
+      </div>
+      // </div>
+    );
 };
 
 const DeleteOption = ({
@@ -167,22 +166,19 @@ const EditOption = ({
 
   return (
     <div className="editable-selected-document-info">
-      {!editMode && (
-        <Button thin positive onClick={() => enterEditMode()}>
-          edit
-        </Button>
-      )}
       {editMode ? (
-        <input
-          onChange={handleNameChange}
-          type="name"
-          name="name"
-          placeholder="name (max 15 chars.)"
-          value={formData.name}
-        ></input>
-      ) : (
-        <h1>{document.name}</h1>
-      )}
+        <>
+          <input
+            onChange={handleNameChange}
+            type="name"
+            name="name"
+            placeholder="name (max 15 chars.)"
+            value={formData.name}
+          ></input>
+          <br />
+        </>
+      ) : null}
+
       {editMode ? (
         <textarea
           onChange={handleDescChange}
@@ -194,6 +190,12 @@ const EditOption = ({
       ) : (
         <p>{document.description}</p>
       )}
+      {!editMode && (
+        <Button thin positive onClick={() => enterEditMode()}>
+          edit
+        </Button>
+      )}
+      <br />
       {editMode && (
         <>
           <Button onClick={() => updateDocument()} positive thin>

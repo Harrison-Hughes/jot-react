@@ -23,19 +23,19 @@ const ProjectCard = props => {
           <p>{props.desc}</p>
         </div>
         <div className="project-card-back">
-          <h3>{props.title}</h3>
+          <h3 className="project-card-back-title">{props.title}</h3>
           <div className="project-card-back-grid">
-            <div className="right">project code:</div>{" "}
-            <div className="left">{props.code}</div>
-            <div className="right">your access:</div>{" "}
-            <div className="left">{access}</div>
-            <div className="right">status:</div>{" "}
-            <div className="left">{props.status}</div>
-            <div className="right">last edited:</div>{" "}
-            <div className="left">{lastEdited(props.lastEdited)}</div>
+            <div className="right ">project code:</div>{" "}
+            <div className="left ">{props.code}</div>
+            <div className="right ">access:</div>{" "}
+            <div className="left ">{access}</div>
+            <div className="right ">status:</div>{" "}
+            <div className="left ">{props.status}</div>
+            <div className="right ">last edited:</div>{" "}
+            <div className="left ">{lastEdited(props.lastEdited)}</div>
           </div>
           <Link to={`/project/${props.code}`}>
-            <button>open</button>
+            <button className="cente">open</button>
           </Link>
         </div>
       </div>

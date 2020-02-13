@@ -14,9 +14,6 @@ const Home = props => {
 
   useEffect(() => console.log(error), [error]);
 
-<<<<<<< HEAD
-  // useEffect(() => popUpErrorMessage("jupiter's moons"), []);
-=======
   useEffect(() => {
     if (props.cableConnection) {
       const subscription = props.cableConnection.subscriptions.create(
@@ -30,7 +27,6 @@ const Home = props => {
       );
     }
   });
->>>>>>> 6d701a606ea84a2943884883aacb47bcc984bd38
 
   const fetchInvitations = () => {
     API.myInvitations(props.user.user_code)
@@ -83,8 +79,7 @@ const Home = props => {
         removeInvitationFromList={ID => removeInvitationFromList(ID)}
         invitations={invitations}
         user={props.user}
-      />{" "}
-      )}
+      />
     </div>
   );
 };
