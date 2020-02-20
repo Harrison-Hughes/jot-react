@@ -6,6 +6,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import AuthenticatedApp from "./auth-app/authenticated-app";
 import SignUpForm from "./unauth-app/unauth-forms/SignUpForm";
 import SignInForm from "./unauth-app/unauth-forms/SignInForm";
+import LoadingScreen from "./elements/LoadingScreen";
 
 const App = () => {
   const [user, setUser] = useState(null);
@@ -17,7 +18,7 @@ const App = () => {
     API.clearToken();
   };
 
-  // useEffect(() => console.log(user), [user]);
+  useEffect(() => console.log(error), [error]);
 
   useEffect(() => {
     if (API.hasToken) {
@@ -32,12 +33,7 @@ const App = () => {
     }
   }, []);
 
-  if (!validatedUser)
-    return (
-      <div className="validating-screen">
-        please wait while we validate your user
-      </div>
-    );
+  if (!validatedUser) return <LoadingScreen />;
   else
     return (
       <Switch>

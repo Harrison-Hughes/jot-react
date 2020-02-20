@@ -23,7 +23,7 @@ const Pad = ({ user, location, match, cableConnection }) => {
   };
 
   if (cableConnection && pad && padSubscriptionRef.current === null) {
-    console.log("pad subscribed");
+    // console.log("pad subscribed");
     padSubscriptionRef.current = cableConnection.subscriptions.create(
       { channel: "PointsChannel", pad: pad.id },
       {
@@ -34,7 +34,7 @@ const Pad = ({ user, location, match, cableConnection }) => {
 
   useEffect(() => {
     return () => {
-      console.log("pad unsubscribed");
+      // console.log("pad unsubscribed");
       padSubscriptionRef.current && padSubscriptionRef.current.unsubscribe();
     };
   }, []);

@@ -15,13 +15,8 @@ const SignInForm = props => {
     API.signin({ email, password })
       .then(user => props.signIn(user))
       .then(<Redirect to="/Homescreen" />)
-      .catch(errorPromise => {
-        errorPromise.then(data => {
-          setError(data.error);
-        });
-      });
+      .catch(setError(console.log));
   };
-
   // useEffect(() => console.log(error), [error]);
 
   return (
@@ -59,7 +54,7 @@ const SignInForm = props => {
         </form>
       </div>
       <div className="foot">
-        Don't have an account? Please <Link to="/welcometojot">sign up </Link>
+        Don't have an account? Please <Link to="/welcometojot">sign up</Link>{" "}
         instead
       </div>
     </div>

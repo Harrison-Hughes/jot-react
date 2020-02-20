@@ -61,7 +61,6 @@ const dateDiff = (last, curr) => {
 };
 
 const timeDiff = (last, curr) => {
-  // [hour, min]
   let a = last.split(":");
   let b = curr.split(":");
   if (a[0] === b[0] && a[1] === b[1]) return "just now";
@@ -79,7 +78,6 @@ const lastEdited = lastEditedDateTime => {
   });
   let dDiff = dateDiff(lastEditedDateTime.split("T")[0], currDate);
   if (dDiff === "same date") {
-    // if (!!dDiff) {
     return timeDiff(lastEditedDateTime.split("T")[1], currTime);
   } else return dDiff;
 };

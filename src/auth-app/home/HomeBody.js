@@ -28,14 +28,7 @@ const HomeBody = ({
     API.myProjects(user.user_code)
       .then(setProjects)
       .catch(setError);
-    // .catch(errorPromise => {
-    //   errorPromise.then(data => {
-    //     setError(data);
-    //   });
-    // });
   };
-
-  // console.log(!!error, !!error && error.status);
 
   if (!!error && error.status === 500)
     return (

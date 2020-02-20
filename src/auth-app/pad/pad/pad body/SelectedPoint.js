@@ -15,7 +15,7 @@ const SelectedPoint = ({
     API.deletePoint(selectedPoint.id);
   };
 
-  console.log(userCode, selectedPoint);
+  // console.log(userCode, selectedPoint);
 
   const updatePoint = newText => {
     API.editPoint(selectedPoint.id, newText);

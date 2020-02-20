@@ -34,17 +34,6 @@ const Home = props => {
   }
 
   useEffect(() => {
-    // if (props.cableConnection && props.user.id) {
-    //   homeSubscriptionRef.current = props.cableConnection.subscriptions.create(
-    //     {
-    //       channel: "InvitationsChannel",
-    //       user: props.user.id
-    //     },
-    //     {
-    //       received: resp => handleReceivedInvitation(resp.invitation)
-    //     }
-    //   );
-    // }
     return () => {
       console.log("invitations unsubscribed");
       homeSubscriptionRef.current && homeSubscriptionRef.current.unsubscribe();
@@ -92,14 +81,6 @@ const Home = props => {
 
   return (
     <div className="home container">
-      {/* {!!props.user && (
-        <ActionCableConsumer
-          channel={{ channel: "InvitationsChannel", user: props.user.id }}
-          onReceived={resp => handleReceivedInvitation(resp.invitation)}
-          onConnected={() => console.log("I'm connected twice")}
-          // onDisconnected={() => console.log("I'm disconnected")}
-        />
-      )} */}
       <HomeHeader logOut={() => props.logOut()} user={props.user} />
       <HomeBody
         popUpErrorMessage={msg => popUpErrorMessage(msg)}

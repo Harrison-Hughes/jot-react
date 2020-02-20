@@ -8,7 +8,6 @@ import { API_WS_ROOT } from "../constants/index";
 import ActionCable from "actioncable";
 
 const AuthenticatedApp = props => {
-  // console.log("AuthenticatedApp");
   const [cable, setCable] = useState(null);
 
   useEffect(() => {
